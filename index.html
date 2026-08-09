@@ -318,6 +318,122 @@
     .clr-jaw { color: #ffe066; }
     .clr-hair { color: #ffa96a; }
     .clr-sleep { color: #6aaeff; }
+
+    /* ===== SPEED PLAN TAB ===== */
+    .speed-hero {
+      background: linear-gradient(135deg, rgba(124,106,255,0.12), rgba(106,255,180,0.08));
+      border: 1px solid rgba(124,106,255,0.25); border-radius: var(--radius);
+      padding: 20px; margin-bottom: 16px;
+      display: flex; gap: 16px; align-items: center; flex-wrap: wrap;
+    }
+    .speed-hero-left { flex: 1; min-width: 200px; }
+    .speed-title { font-size: 1.3rem; font-weight: 800; margin-bottom: 4px;
+      background: linear-gradient(135deg,#7c6aff,#6affb4); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .speed-sub { font-size: 0.82rem; color: var(--text2); margin-bottom: 12px; }
+    .speed-pace-row { display: flex; gap: 6px; flex-wrap: wrap; }
+    .speed-pace-chip { padding: 3px 10px; border-radius: 20px; font-size: 0.72rem; font-weight: 600; }
+    .chip-now  { background: rgba(255,255,255,0.08); color: var(--text2); border: 1px solid var(--border); }
+    .chip-p1   { background: rgba(106,255,180,0.15); color: var(--accent3); border: 1px solid rgba(106,255,180,0.3); }
+    .chip-p2   { background: rgba(124,106,255,0.15); color: var(--accent); border: 1px solid rgba(124,106,255,0.3); }
+    .chip-p3   { background: rgba(255,106,158,0.15); color: var(--accent2); border: 1px solid rgba(255,106,158,0.3); }
+    .speed-hero-right { text-align: center; }
+    .week-selector-label { font-size: 0.72rem; color: var(--text2); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .week-selector-row { display: flex; align-items: center; gap: 10px; justify-content: center; margin-bottom: 8px; }
+    .week-display { font-size: 1.2rem; font-weight: 800; color: var(--accent4); min-width: 80px; text-align: center; }
+    .wk-btn { background: var(--surface3); border: 1px solid var(--border); color: var(--text);
+      width: 30px; height: 30px; border-radius: 8px; cursor: pointer; font-size: 1.1rem;
+      display: flex; align-items: center; justify-content: center; font-family: inherit; }
+    .wk-btn:hover { background: var(--accent); border-color: var(--accent); }
+    .phase-badge { display: inline-block; padding: 3px 14px; border-radius: 20px; font-size: 0.75rem;
+      font-weight: 700; background: rgba(124,106,255,0.2); color: var(--accent); border: 1px solid rgba(124,106,255,0.3); }
+
+    /* Journey bar */
+    .journey-bar-wrap { margin-bottom: 20px; }
+    .journey-label { display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--text3); margin-bottom: 6px; }
+    .journey-track { position: relative; height: 10px; background: var(--surface2);
+      border-radius: 5px; overflow: visible; border: 1px solid var(--border); }
+    .journey-fill { height: 100%; border-radius: 5px;
+      background: linear-gradient(90deg, #6affb4, #7c6aff, #ff6a9e); transition: width 0.5s ease; }
+    .journey-marker { position: absolute; top: -18px; transform: translateX(-50%);
+      font-size: 0.65rem; font-weight: 700; color: var(--text2); background: var(--surface2);
+      border: 1px solid var(--border); border-radius: 4px; padding: 1px 4px; }
+    .journey-targets { display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text3); margin-top: 8px; }
+
+    /* Phase cards */
+    .phase-card { border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+      border: 1px solid var(--border); background: var(--surface); }
+    .phase-header { padding: 16px 20px; display: flex; align-items: center;
+      justify-content: space-between; gap: 12px; }
+    .ph1 { background: linear-gradient(135deg, rgba(106,255,180,0.12), rgba(106,255,180,0.04)); border-bottom: 1px solid rgba(106,255,180,0.2); }
+    .ph2 { background: linear-gradient(135deg, rgba(124,106,255,0.12), rgba(124,106,255,0.04)); border-bottom: 1px solid rgba(124,106,255,0.2); }
+    .ph3 { background: linear-gradient(135deg, rgba(255,106,158,0.12), rgba(255,106,158,0.04)); border-bottom: 1px solid rgba(255,106,158,0.2); }
+    .phase-num { font-size: 0.95rem; font-weight: 800; margin-bottom: 3px; }
+    .phase-goal { font-size: 0.78rem; color: var(--text2); }
+    .phase-tag { padding: 4px 12px; border-radius: 12px; font-size: 0.72rem; font-weight: 700;
+      background: rgba(255,255,255,0.07); color: var(--text); white-space: nowrap; }
+    .phase-body { padding: 16px 20px; }
+    .phase-science { background: var(--surface2); border-radius: var(--radius-sm);
+      padding: 12px; margin-bottom: 16px; display: flex; flex-direction: column; gap: 8px; }
+    .ps-item { display: flex; gap: 10px; font-size: 0.82rem; line-height: 1.5; color: var(--text2); }
+    .ps-icon { flex-shrink: 0; font-size: 1rem; }
+    .phase-section-title { font-size: 0.82rem; font-weight: 700; color: var(--text);
+      margin: 16px 0 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .phase-rule { background: rgba(124,106,255,0.08); border: 1px solid rgba(124,106,255,0.2);
+      border-radius: var(--radius-sm); padding: 10px 14px; font-size: 0.8rem;
+      color: var(--text2); margin-top: 16px; }
+
+    /* Week structure (day boxes) */
+    .week-structure { display: grid; grid-template-columns: repeat(7,1fr); gap: 4px; margin-bottom: 4px; }
+    .ws-day { text-align: center; }
+    .ws-day-name { font-size: 0.65rem; font-weight: 800; padding: 4px 2px;
+      border-radius: 4px 4px 0 0; text-transform: uppercase; }
+    .wd-mon  { background: rgba(106,255,180,0.15); color: var(--accent3); }
+    .wd-key  { background: rgba(255,95,95,0.2); color: #ff8080; }
+    .wd-rest { background: rgba(255,255,255,0.05); color: var(--text3); }
+    .ws-session { font-size: 0.68rem; color: var(--text2); padding: 6px 3px;
+      background: var(--surface2); border-radius: 0 0 4px 4px;
+      line-height: 1.4; min-height: 52px; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; }
+    .ws-session small { color: var(--text3); font-size: 0.63rem; }
+    .key-session { background: rgba(255,95,95,0.08); color: var(--text); font-weight: 600; }
+
+    /* Interval explain */
+    .interval-explain { font-size: 0.8rem; color: var(--text2); background: var(--surface2);
+      border-left: 3px solid var(--accent); padding: 8px 12px;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin-bottom: 10px; line-height: 1.5; }
+
+    /* Pace table */
+    .pace-table-wrap { overflow-x: auto; margin-bottom: 4px; border-radius: var(--radius-sm); border: 1px solid var(--border); }
+    .pace-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+    .pace-table th { background: var(--surface2); padding: 8px 10px; text-align: left;
+      font-size: 0.72rem; font-weight: 700; color: var(--text2); text-transform: uppercase;
+      letter-spacing: 0.3px; border-bottom: 1px solid var(--border); }
+    .pace-table td { padding: 9px 10px; border-bottom: 1px solid rgba(255,255,255,0.04);
+      color: var(--text); vertical-align: middle; }
+    .pace-table tr:last-child td { border-bottom: none; }
+    .pace-table tr:hover td { background: rgba(124,106,255,0.05); }
+    .test-row td { background: rgba(106,255,180,0.06) !important; color: var(--accent3) !important; font-weight: 600; }
+    .speed-check { width: 18px; height: 18px; accent-color: var(--accent3); cursor: pointer; }
+
+    /* Effort zones */
+    .zone-table-wrap { overflow-x: auto; border-radius: var(--radius-sm); border: 1px solid var(--border); margin-bottom: 10px; }
+    .zone-dot { display: inline-block; padding: 2px 8px; border-radius: 6px; font-size: 0.72rem; font-weight: 800; }
+    .z1 { background: rgba(106,174,255,0.2); color: #6aaeff; }
+    .z2 { background: rgba(106,255,180,0.2); color: var(--accent3); }
+    .z3 { background: rgba(255,224,102,0.2); color: var(--yellow); }
+    .z4 { background: rgba(255,169,106,0.2); color: var(--accent4); }
+    .z5 { background: rgba(255,95,95,0.2); color: var(--red); }
+    .zone-note { font-size: 0.8rem; color: var(--text2); line-height: 1.5; }
+
+    /* Test log */
+    .test-log { display: flex; flex-direction: column; gap: 8px; }
+    .test-entry { display: flex; align-items: center; gap: 14px; }
+    .te-label { font-size: 0.82rem; color: var(--text2); min-width: 130px; }
+    .te-input { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius-sm);
+      padding: 8px 12px; color: var(--text); font-family: inherit; font-size: 0.85rem; flex: 1;
+      max-width: 140px; transition: border-color 0.2s; }
+    .te-input:focus { outline: none; border-color: var(--accent); }
+    .te-input::placeholder { color: var(--text3); }
   </style>
 </head>
 <body>
@@ -378,6 +494,7 @@
 <div class="tabs">
   <button class="tab active" onclick="switchTab('daily')">📋 Daily Routine</button>
   <button class="tab" onclick="switchTab('weekly')">📅 Weekly Plan</button>
+  <button class="tab" onclick="switchTab('speed')">⚡ Speed Plan</button>
   <button class="tab" onclick="switchTab('donts')">🚫 Don'ts</button>
   <button class="tab" onclick="switchTab('reference')">📖 Reference</button>
 </div>
@@ -1102,6 +1219,351 @@
   </div>
 </div>
 
+<!-- SPEED PLAN TAB -->
+<div class="tab-panel content" id="tab-speed">
+
+  <!-- 20-week journey bar -->
+  <div class="speed-hero">
+    <div class="speed-hero-left">
+      <div class="speed-title">⚡ 5K Speed Plan</div>
+      <div class="speed-sub">33 min → sub-25 min over 20 weeks</div>
+      <div class="speed-pace-row">
+        <div class="speed-pace-chip chip-now">Now: 6:30–6:36/km</div>
+        <div class="speed-pace-chip chip-p1">Phase 1: 5:59/km</div>
+        <div class="speed-pace-chip chip-p2">Phase 2: 5:24/km</div>
+        <div class="speed-pace-chip chip-p3">Phase 3: 4:59/km</div>
+      </div>
+    </div>
+    <div class="speed-hero-right">
+      <div class="week-selector-label">Current Week</div>
+      <div class="week-selector-row">
+        <button class="wk-btn" onclick="changeWeek(-1)">−</button>
+        <div class="week-display" id="week-display">Week 1</div>
+        <button class="wk-btn" onclick="changeWeek(1)">+</button>
+      </div>
+      <div class="phase-badge" id="phase-badge">Phase 1</div>
+    </div>
+  </div>
+
+  <!-- Overall 20-week progress bar -->
+  <div class="journey-bar-wrap">
+    <div class="journey-label">
+      <span>Week 1</span><span id="journey-label-mid">Phase 1 → Phase 2 → Phase 3</span><span>Week 20</span>
+    </div>
+    <div class="journey-track">
+      <div class="journey-fill" id="journey-fill" style="width:5%"></div>
+      <div class="journey-marker" style="left:30%" title="Phase 2 starts"><span>P2</span></div>
+      <div class="journey-marker" style="left:60%" title="Phase 3 starts"><span>P3</span></div>
+      <div class="journey-marker" style="left:100%" title="Sub-25!"><span>🏁</span></div>
+    </div>
+    <div class="journey-targets">
+      <span>33 min</span><span style="left:30%">sub-30</span><span style="left:60%">sub-27</span><span>sub-25</span>
+    </div>
+  </div>
+
+  <!-- PHASE 1 -->
+  <div class="phase-card" id="phase1-card">
+    <div class="phase-header ph1">
+      <div>
+        <div class="phase-num">PHASE 1 — Weeks 1–6</div>
+        <div class="phase-goal">33 min → sub-30 min &nbsp;·&nbsp; 6:36/km → 5:59/km</div>
+      </div>
+      <div class="phase-tag">400m Repeats</div>
+    </div>
+    <div class="phase-body">
+
+      <div class="phase-science">
+        <div class="ps-item"><span class="ps-icon">🔬</span><span>Run at paces <strong>20–30 sec/km faster</strong> than your 5K pace in short bursts — your nervous system adapts and that hard pace becomes your new race pace.</span></div>
+        <div class="ps-item"><span class="ps-icon">⏱️</span><span>Equal rest = partial (not full) recovery → you start each rep slightly tired → body is forced to be more efficient over weeks.</span></div>
+        <div class="ps-item"><span class="ps-icon">🎯</span><span>80% of your running this phase should be <strong>easy (Zone 2)</strong>. Only 20% hard. Most runners plateau by running everything at medium effort.</span></div>
+      </div>
+
+      <div class="phase-section-title">📅 Weekly Structure</div>
+      <div class="week-structure">
+        <div class="ws-day">
+          <div class="ws-day-name wd-mon">MON</div>
+          <div class="ws-session">Easy Run<br/><small>4 km · 7:00–7:15/km</small></div>
+        </div>
+        <div class="ws-day">
+          <div class="ws-day-name wd-key">TUE ⚡</div>
+          <div class="ws-session key-session">400m Repeats<br/><small>See table below</small></div>
+        </div>
+        <div class="ws-day">
+          <div class="ws-day-name wd-rest">WED</div>
+          <div class="ws-session">REST<br/><small>Walk only</small></div>
+        </div>
+        <div class="ws-day">
+          <div class="ws-day-name wd-key">THU ⚡</div>
+          <div class="ws-session key-session">Tempo Run<br/><small>See table below</small></div>
+        </div>
+        <div class="ws-day">
+          <div class="ws-day-name wd-rest">FRI</div>
+          <div class="ws-session">REST</div>
+        </div>
+        <div class="ws-day">
+          <div class="ws-day-name wd-key">SAT ⚡</div>
+          <div class="ws-session key-session">Long Easy Run<br/><small>See table below</small></div>
+        </div>
+        <div class="ws-day">
+          <div class="ws-day-name wd-mon">SUN</div>
+          <div class="ws-session">Easy 3km<br/><small>or REST</small></div>
+        </div>
+      </div>
+
+      <div class="phase-section-title">🔴 Tuesday — 400m Repeats (Key Session)</div>
+      <div class="interval-explain">Run 400m → Rest same time → Repeat. Target: 8/10 effort. Hard but not gasping.</div>
+      <div class="pace-table-wrap">
+        <table class="pace-table">
+          <thead><tr><th>Week</th><th>Reps</th><th>Target 400m</th><th>Rest</th><th>Total Fast km</th><th>Done?</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>6 × 400m</td><td>2:20</td><td>2:20</td><td>2.4 km</td><td><input type="checkbox" class="speed-check" data-sid="p1-t1" onchange="saveSpeedCheck(this)"/></td></tr>
+            <tr><td>2</td><td>6 × 400m</td><td>2:18</td><td>2:18</td><td>2.4 km</td><td><input type="checkbox" class="speed-check" data-sid="p1-t2" onchange="saveSpeedCheck(this)"/></td></tr>
+            <tr><td>3</td><td>8 × 400m</td><td>2:15</td><td>2:15</td><td>3.2 km</td><td><input type="checkbox" class="speed-check" data-sid="p1-t3" onchange="saveSpeedCheck(this)"/></td></tr>
+            <tr><td>4</td><td>8 × 400m</td><td>2:12</td><td>2:12</td><td>3.2 km</td><td><input type="checkbox" class="speed-check" data-sid="p1-t4" onchange="saveSpeedCheck(this)"/></td></tr>
+            <tr><td>5</td><td>10 × 400m</td><td>2:10</td><td>2:10</td><td>4.0 km</td><td><input type="checkbox" class="speed-check" data-sid="p1-t5" onchange="saveSpeedCheck(this)"/></td></tr>
+            <tr class="test-row"><td>6</td><td colspan="3">🏁 TIMED 5K TEST — full effort, track your time</td><td>—</td><td><input type="checkbox" class="speed-check" data-sid="p1-t6" onchange="saveSpeedCheck(this)"/></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="phase-section-title">🟠 Thursday — Tempo Run</div>
+      <div class="interval-explain">Comfortably hard. Can say 3 words, not a full sentence. Sustained effort, no stopping.</div>
+      <div class="pace-table-wrap">
+        <table class="pace-table">
+          <thead><tr><th>Week</th><th>Distance</th><th>Target Pace</th><th>Done?</th></tr></thead>
+          <tbody>
+            <tr><td>1–2</td><td>2.5 km</td><td>6:10/km</td><td><input type="checkbox" class="speed-check" data-sid="p1-th1" onchange="saveSpeedCheck(this)"/></td></tr>
+            <tr><td>3–4</td><td>3 km</td><td>6:00/km</td><td><input type="checkbox" class="speed-check" data-sid="p1-th2" onchange="saveSpeedCheck(this)"/></td></tr>
+            <tr><td>5–6</td><td>3.5 km</td><td>5:55/km</td><td><input type="checkbox" class="speed-check" data-sid="p1-th3" onchange="saveSpeedCheck(this)"/></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="phase-section-title">🟢 Saturday — Long Easy Run</div>
+      <div class="pace-table-wrap">
+        <table class="pace-table">
+          <thead><tr><th>Week</th><th>Distance</th><th>Pace</th><th>Done?</th></tr></thead>
+          <tbody>
+            <tr><td>1–2</td><td>6 km</td><td>7:00–7:15/km</td><td><input type="checkbox" class="speed-check" data-sid="p1-l1" onchange="saveSpeedCheck(this)"/></td></tr>
+            <tr><td>3–4</td><td>7 km</td><td>6:55–7:10/km</td><td><input type="checkbox" class="speed-check" data-sid="p1-l2" onchange="saveSpeedCheck(this)"/></td></tr>
+            <tr><td>5–6</td><td>8 km</td><td>6:45–7:00/km</td><td><input type="checkbox" class="speed-check" data-sid="p1-l3" onchange="saveSpeedCheck(this)"/></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="phase-rule">📦 Weekly volume: ~28–32 km &nbsp;|&nbsp; 🎯 Phase 1 target: sub-30 min 5K by Week 6</div>
+    </div>
+  </div>
+
+  <!-- PHASE 2 -->
+  <div class="phase-card" id="phase2-card">
+    <div class="phase-header ph2">
+      <div>
+        <div class="phase-num">PHASE 2 — Weeks 7–12</div>
+        <div class="phase-goal">sub-30 → sub-27 min &nbsp;·&nbsp; 5:59/km → 5:24/km</div>
+      </div>
+      <div class="phase-tag">Yasso 800s</div>
+    </div>
+    <div class="phase-body">
+
+      <div class="phase-science">
+        <div class="ps-item"><span class="ps-icon">🔬</span><span><strong>Yasso 800s</strong> (Bart Yasso, Runner's World): Run 800m repeats with equal rest. The 800m time in mm:ss predicts your marathon finish time in hrs:mins. For 5K we use the same logic — your 800m rep time tells you where your race fitness sits.</span></div>
+        <div class="ps-item"><span class="ps-icon">📐</span><span>Formula: <strong>Target 800m time = Goal 5K pace × 0.88</strong>. E.g. sub-27 5K = 5:24/km → target 800m = 4:45 per rep.</span></div>
+        <div class="ps-item"><span class="ps-icon">⚡</span><span>Transition from short 400m bursts to sustained 800m efforts. This is where your lactate threshold gets seriously raised.</span></div>
+      </div>
+
+      <div class="phase-section-title">📅 Weekly Structure</div>
+      <div class="week-structure">
+        <div class="ws-day"><div class="ws-day-name wd-mon">MON</div><div class="ws-session">Easy 5km<br/><small>6:50–7:00/km</small></div></div>
+        <div class="ws-day"><div class="ws-day-name wd-key">TUE ⚡</div><div class="ws-session key-session">Yasso 800s<br/><small>See table below</small></div></div>
+        <div class="ws-day"><div class="ws-day-name wd-rest">WED</div><div class="ws-session">REST or<br/><small>light 3km jog</small></div></div>
+        <div class="ws-day"><div class="ws-day-name wd-key">THU ⚡</div><div class="ws-session key-session">Extended Tempo<br/><small>See table below</small></div></div>
+        <div class="ws-day"><div class="ws-day-name wd-rest">FRI</div><div class="ws-session">REST</div></div>
+        <div class="ws-day"><div class="ws-day-name wd-key">SAT ⚡</div><div class="ws-session key-session">Long Progression<br/><small>See table below</small></div></div>
+        <div class="ws-day"><div class="ws-day-name wd-mon">SUN</div><div class="ws-session">Easy 4km<br/><small>or REST</small></div></div>
+      </div>
+
+      <div class="phase-section-title">🔴 Tuesday — Yasso 800m Repeats (Key Session)</div>
+      <div class="interval-explain">Run 800m → Rest the exact same time → Repeat. The rest is a slow jog or walk — NOT sitting down.</div>
+      <div class="pace-table-wrap">
+        <table class="pace-table">
+          <thead><tr><th>Week</th><th>Reps</th><th>Target 800m</th><th>Rest</th><th>Total Fast km</th><th>Done?</th></tr></thead>
+          <tbody>
+            <tr><td>7</td><td>4 × 800m</td><td>4:30</td><td>4:30</td><td>3.2 km</td><td><input type="checkbox" class="speed-check" data-sid="p2-t1" onchange="saveSpeedCheck(this)"/></td></tr>
+            <tr><td>8</td><td>5 × 800m</td><td>4:25</td><td>4:25</td><td>4.0 km</td><td><input type="checkbox" class="speed-check" data-sid="p2-t2" onchange="saveSpeedCheck(this)"/></td></tr>
+            <tr><td>9</td><td>5 × 800m</td><td>4:20</td><td>4:20</td><td>4.0 km</td><td><input type="checkbox" class="speed-check" data-sid="p2-t3" onchange="saveSpeedCheck(this)"/></td></tr>
+            <tr><td>10</td><td>6 × 800m</td><td>4:15</td><td>4:15</td><td>4.8 km</td><td><input type="checkbox" class="speed-check" data-sid="p2-t4" onchange="saveSpeedCheck(this)"/></td></tr>
+            <tr><td>11</td><td>6 × 800m</td><td>4:10</td><td>4:10</td><td>4.8 km</td><td><input type="checkbox" class="speed-check" data-sid="p2-t5" onchange="saveSpeedCheck(this)"/></td></tr>
+            <tr class="test-row"><td>12</td><td colspan="3">🏁 TIMED 5K TEST — target sub-27 min</td><td>—</td><td><input type="checkbox" class="speed-check" data-sid="p2-t6" onchange="saveSpeedCheck(this)"/></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="phase-section-title">🟠 Thursday — Extended Tempo</div>
+      <div class="pace-table-wrap">
+        <table class="pace-table">
+          <thead><tr><th>Week</th><th>Format</th><th>Pace</th><th>Done?</th></tr></thead>
+          <tbody>
+            <tr><td>7–8</td><td>4 km continuous</td><td>5:50/km</td><td><input type="checkbox" class="speed-check" data-sid="p2-th1" onchange="saveSpeedCheck(this)"/></td></tr>
+            <tr><td>9–10</td><td>2 × 2km · 2 min rest</td><td>5:40/km each block</td><td><input type="checkbox" class="speed-check" data-sid="p2-th2" onchange="saveSpeedCheck(this)"/></td></tr>
+            <tr><td>11–12</td><td>5 km continuous</td><td>5:45/km</td><td><input type="checkbox" class="speed-check" data-sid="p2-th3" onchange="saveSpeedCheck(this)"/></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="phase-section-title">🟢 Saturday — Long Progression Run</div>
+      <div class="interval-explain">Start easy, finish strong. Last 2 km should be your fastest km of the run.</div>
+      <div class="pace-table-wrap">
+        <table class="pace-table">
+          <thead><tr><th>Week</th><th>Distance</th><th>Strategy</th><th>Done?</th></tr></thead>
+          <tbody>
+            <tr><td>7–9</td><td>9–10 km</td><td>Easy → last 2 km at 6:10/km</td><td><input type="checkbox" class="speed-check" data-sid="p2-l1" onchange="saveSpeedCheck(this)"/></td></tr>
+            <tr><td>10–12</td><td>10–12 km</td><td>Easy → Moderate → last 2 km at 5:55/km</td><td><input type="checkbox" class="speed-check" data-sid="p2-l2" onchange="saveSpeedCheck(this)"/></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="phase-rule">📦 Weekly volume: ~38–45 km &nbsp;|&nbsp; 🎯 Phase 2 target: sub-27 min 5K by Week 12</div>
+    </div>
+  </div>
+
+  <!-- PHASE 3 -->
+  <div class="phase-card" id="phase3-card">
+    <div class="phase-header ph3">
+      <div>
+        <div class="phase-num">PHASE 3 — Weeks 13–20</div>
+        <div class="phase-goal">sub-27 → sub-25 min &nbsp;·&nbsp; 5:24/km → 4:59/km</div>
+      </div>
+      <div class="phase-tag">800m + 1km Reps</div>
+    </div>
+    <div class="phase-body">
+
+      <div class="phase-science">
+        <div class="ps-item"><span class="ps-icon">🔬</span><span>Alternating between <strong>800m Yasso reps</strong> and <strong>1km cruise intervals</strong> — the variety prevents adaptation plateau and keeps VO2 Max stressed from different angles.</span></div>
+        <div class="ps-item"><span class="ps-icon">📐</span><span><strong>Strides added on Sunday</strong> — 4 × 100m near-sprint. Trains leg turnover speed (cadence). Feels tiny but has outsized impact on finishing kick in races.</span></div>
+        <div class="ps-item"><span class="ps-icon">⚡</span><span>Weekly volume goes to 50–55km. At this stage, your aerobic engine is the key differentiator. Long runs become the most important session.</span></div>
+      </div>
+
+      <div class="phase-section-title">📅 Weekly Structure</div>
+      <div class="week-structure">
+        <div class="ws-day"><div class="ws-day-name wd-mon">MON</div><div class="ws-session">Easy 5–6km<br/><small>6:45–7:00/km</small></div></div>
+        <div class="ws-day"><div class="ws-day-name wd-key">TUE ⚡</div><div class="ws-session key-session">Mixed Intervals<br/><small>Alternating A/B</small></div></div>
+        <div class="ws-day"><div class="ws-day-name wd-rest">WED</div><div class="ws-session">REST or<br/><small>very easy 4km</small></div></div>
+        <div class="ws-day"><div class="ws-day-name wd-key">THU ⚡</div><div class="ws-session key-session">Threshold Run<br/><small>See table below</small></div></div>
+        <div class="ws-day"><div class="ws-day-name wd-rest">FRI</div><div class="ws-session">REST</div></div>
+        <div class="ws-day"><div class="ws-day-name wd-key">SAT ⚡</div><div class="ws-session key-session">Long Run<br/><small>See table below</small></div></div>
+        <div class="ws-day"><div class="ws-day-name wd-mon">SUN</div><div class="ws-session">Easy 5km +<br/><small>4×100m Strides</small></div></div>
+      </div>
+
+      <div class="phase-section-title">🔴 Tuesday — Mixed Intervals (Alternating Weeks)</div>
+      <div class="interval-explain">
+        <strong>Week A:</strong> Yasso 800s &nbsp;&nbsp;|&nbsp;&nbsp; <strong>Week B:</strong> 1km Cruise Intervals (3 min rest — slightly less than equal)
+      </div>
+      <div class="pace-table-wrap">
+        <table class="pace-table">
+          <thead><tr><th>Week</th><th>Session</th><th>Reps</th><th>Target Time</th><th>Rest</th><th>Done?</th></tr></thead>
+          <tbody>
+            <tr><td>13</td><td>A — 800m Yasso</td><td>6 × 800m</td><td>4:00</td><td>4:00</td><td><input type="checkbox" class="speed-check" data-sid="p3-t1" onchange="saveSpeedCheck(this)"/></td></tr>
+            <tr><td>14</td><td>B — 1km Cruise</td><td>4 × 1000m</td><td>5:00</td><td>3:00</td><td><input type="checkbox" class="speed-check" data-sid="p3-t2" onchange="saveSpeedCheck(this)"/></td></tr>
+            <tr><td>15</td><td>A — 800m Yasso</td><td>6 × 800m</td><td>3:55</td><td>3:55</td><td><input type="checkbox" class="speed-check" data-sid="p3-t3" onchange="saveSpeedCheck(this)"/></td></tr>
+            <tr><td>16</td><td>B — 1km Cruise</td><td>5 × 1000m</td><td>4:55</td><td>3:00</td><td><input type="checkbox" class="speed-check" data-sid="p3-t4" onchange="saveSpeedCheck(this)"/></td></tr>
+            <tr><td>17</td><td>A — 800m Yasso</td><td>7 × 800m</td><td>3:52</td><td>3:52</td><td><input type="checkbox" class="speed-check" data-sid="p3-t5" onchange="saveSpeedCheck(this)"/></td></tr>
+            <tr><td>18</td><td>B — 1km Cruise</td><td>5 × 1000m</td><td>4:50</td><td>2:45</td><td><input type="checkbox" class="speed-check" data-sid="p3-t6" onchange="saveSpeedCheck(this)"/></td></tr>
+            <tr><td>19</td><td>A — 800m Sharpener</td><td>4 × 800m</td><td>3:48</td><td>3:48</td><td><input type="checkbox" class="speed-check" data-sid="p3-t7" onchange="saveSpeedCheck(this)"/></td></tr>
+            <tr class="test-row"><td>20</td><td colspan="3">🏁 TIMED 5K TEST — target sub-25 min &nbsp;🎯</td><td>—</td><td><input type="checkbox" class="speed-check" data-sid="p3-t8" onchange="saveSpeedCheck(this)"/></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="phase-section-title">🟠 Thursday — Threshold Runs</div>
+      <div class="pace-table-wrap">
+        <table class="pace-table">
+          <thead><tr><th>Week</th><th>Format</th><th>Pace</th><th>Done?</th></tr></thead>
+          <tbody>
+            <tr><td>13–14</td><td>5 km continuous</td><td>5:30/km</td><td><input type="checkbox" class="speed-check" data-sid="p3-th1" onchange="saveSpeedCheck(this)"/></td></tr>
+            <tr><td>15–16</td><td>3 × 1.5km · 90 sec rest</td><td>5:15/km each</td><td><input type="checkbox" class="speed-check" data-sid="p3-th2" onchange="saveSpeedCheck(this)"/></td></tr>
+            <tr><td>17–18</td><td>6 km continuous</td><td>5:25/km</td><td><input type="checkbox" class="speed-check" data-sid="p3-th3" onchange="saveSpeedCheck(this)"/></td></tr>
+            <tr><td>19–20</td><td>4 km race sharpener</td><td>5:10/km</td><td><input type="checkbox" class="speed-check" data-sid="p3-th4" onchange="saveSpeedCheck(this)"/></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="phase-section-title">🟢 Saturday — Long Run + Finish Push</div>
+      <div class="pace-table-wrap">
+        <table class="pace-table">
+          <thead><tr><th>Week</th><th>Distance</th><th>Special Element</th><th>Done?</th></tr></thead>
+          <tbody>
+            <tr><td>13–15</td><td>12 km</td><td>Last 3 km at 5:50/km</td><td><input type="checkbox" class="speed-check" data-sid="p3-l1" onchange="saveSpeedCheck(this)"/></td></tr>
+            <tr><td>16–18</td><td>13 km</td><td>Last 2 km at 5:30/km</td><td><input type="checkbox" class="speed-check" data-sid="p3-l2" onchange="saveSpeedCheck(this)"/></td></tr>
+            <tr><td>19–20</td><td>10 km (taper)</td><td>Easy + 6 × 100m strides at end</td><td><input type="checkbox" class="speed-check" data-sid="p3-l3" onchange="saveSpeedCheck(this)"/></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="phase-section-title">🔵 Sunday — Strides (New in Phase 3)</div>
+      <div class="interval-explain">After easy 5km: 4 × 100m at near-sprint speed. Walk 2 min between each. Only 400m total of fast running — but teaches leg turnover and finishing kick.</div>
+
+      <div class="phase-rule">📦 Weekly volume: ~50–55 km &nbsp;|&nbsp; 🎯 Phase 3 target: <strong>sub-25 min 5K by Week 20</strong> 🏆</div>
+    </div>
+  </div>
+
+  <!-- Effort Zones -->
+  <div class="section" style="margin-top:8px;">
+    <div class="section-header">
+      <div class="section-title"><span class="section-icon">💓</span> Effort Zones — How Hard Should You Run?</div>
+    </div>
+    <div style="padding:16px 20px;">
+      <div class="zone-table-wrap">
+        <table class="pace-table">
+          <thead><tr><th>Zone</th><th>How It Feels</th><th>Use For</th><th>% Max HR</th></tr></thead>
+          <tbody>
+            <tr><td><span class="zone-dot z1">Z1</span></td><td>Can sing</td><td>Warm-up / cool-down</td><td>&lt;65%</td></tr>
+            <tr><td><span class="zone-dot z2">Z2</span></td><td>Full conversation</td><td>Easy runs / long runs</td><td>65–75%</td></tr>
+            <tr><td><span class="zone-dot z3">Z3</span></td><td>4–5 words only</td><td>Tempo runs</td><td>75–85%</td></tr>
+            <tr><td><span class="zone-dot z4">Z4</span></td><td>1–2 words</td><td>Intervals (400m, 800m)</td><td>85–92%</td></tr>
+            <tr><td><span class="zone-dot z5">Z5</span></td><td>Cannot talk</td><td>Strides / sprints</td><td>92–100%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="zone-note">Your 400m and 800m reps should be <strong>Zone 4</strong>. If Zone 5 → too fast, slow down. If Zone 3 → too easy, speed up.</div>
+    </div>
+  </div>
+
+  <!-- Test Protocol -->
+  <div class="section" style="margin-top:12px;">
+    <div class="section-header">
+      <div class="section-title"><span class="section-icon">🏁</span> 5K Test Protocol — Track Your Progress</div>
+    </div>
+    <div style="padding:16px 20px;">
+      <div class="interval-explain" style="margin-bottom:14px;">Run a timed 5K every 3 weeks. Do it after 2 easy days. Full effort. Log the time below.</div>
+      <div class="test-log">
+        <div class="test-entry">
+          <div class="te-label">Baseline (Now)</div>
+          <input class="te-input" type="text" placeholder="e.g. 33:10" id="test-0" oninput="saveTestLog()" />
+        </div>
+        <div class="test-entry">
+          <div class="te-label">Week 6 Test</div>
+          <input class="te-input" type="text" placeholder="Target: sub-30" id="test-1" oninput="saveTestLog()" />
+        </div>
+        <div class="test-entry">
+          <div class="te-label">Week 12 Test</div>
+          <input class="te-input" type="text" placeholder="Target: sub-27" id="test-2" oninput="saveTestLog()" />
+        </div>
+        <div class="test-entry">
+          <div class="te-label">Week 15 Test</div>
+          <input class="te-input" type="text" placeholder="Target: ~26 min" id="test-3" oninput="saveTestLog()" />
+        </div>
+        <div class="test-entry">
+          <div class="te-label">Week 20 Test 🏆</div>
+          <input class="te-input" type="text" placeholder="Target: sub-25" id="test-4" oninput="saveTestLog()" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- END SPEED PLAN TAB -->
+
 <script>
   // ---- State ----
   const TODAY_KEY = () => new Date().toISOString().slice(0,10);
@@ -1310,6 +1772,79 @@
   restoreDailyState();
   restoreWeeklyState();
   updateAllProgress();
+
+  // ---- Speed Plan: Week Selector ----
+  let currentWeek = parseInt(localStorage.getItem('speed_week') || '1');
+
+  function changeWeek(delta) {
+    currentWeek = Math.max(1, Math.min(20, currentWeek + delta));
+    localStorage.setItem('speed_week', currentWeek);
+    renderWeekState();
+  }
+
+  function renderWeekState() {
+    const wd = document.getElementById('week-display');
+    const pb = document.getElementById('phase-badge');
+    const jf = document.getElementById('journey-fill');
+    if (!wd) return;
+    wd.textContent = 'Week ' + currentWeek;
+    const pct = Math.round((currentWeek / 20) * 100);
+    if (jf) jf.style.width = Math.max(2, pct) + '%';
+    let phase, colour;
+    if (currentWeek <= 6)       { phase = 'Phase 1 — 400m Repeats'; colour = 'rgba(106,255,180,0.2)'; }
+    else if (currentWeek <= 12) { phase = 'Phase 2 — Yasso 800s'; colour = 'rgba(124,106,255,0.2)'; }
+    else                        { phase = 'Phase 3 — Mixed Intervals'; colour = 'rgba(255,106,158,0.2)'; }
+    if (pb) { pb.textContent = phase; pb.style.background = colour; }
+
+    // Highlight active phase card
+    ['phase1-card','phase2-card','phase3-card'].forEach((id, idx) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const active = (idx === 0 && currentWeek <= 6) ||
+                     (idx === 1 && currentWeek > 6 && currentWeek <= 12) ||
+                     (idx === 2 && currentWeek > 12);
+      el.style.boxShadow = active ? '0 0 0 2px rgba(124,106,255,0.5)' : '';
+      el.style.transform = active ? 'scale(1.005)' : '';
+    });
+  }
+
+  // ---- Speed Plan: Checkbox Persistence ----
+  const speedState = JSON.parse(localStorage.getItem('speed_checks') || '{}');
+
+  function saveSpeedCheck(el) {
+    speedState[el.dataset.sid] = el.checked;
+    localStorage.setItem('speed_checks', JSON.stringify(speedState));
+  }
+
+  function restoreSpeedChecks() {
+    document.querySelectorAll('.speed-check[data-sid]').forEach(el => {
+      el.checked = !!speedState[el.dataset.sid];
+    });
+  }
+
+  // ---- Speed Plan: Test Log Persistence ----
+  function saveTestLog() {
+    const log = {};
+    for (let i = 0; i <= 4; i++) {
+      const el = document.getElementById('test-' + i);
+      if (el) log['test-' + i] = el.value;
+    }
+    localStorage.setItem('speed_testlog', JSON.stringify(log));
+  }
+
+  function restoreTestLog() {
+    const log = JSON.parse(localStorage.getItem('speed_testlog') || '{}');
+    for (let i = 0; i <= 4; i++) {
+      const el = document.getElementById('test-' + i);
+      if (el && log['test-' + i]) el.value = log['test-' + i];
+    }
+  }
+
+  // Speed plan init
+  restoreSpeedChecks();
+  restoreTestLog();
+  renderWeekState();
+
 
   // ---- PWA Service Worker ----
   if ('serviceWorker' in navigator) {
