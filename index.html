@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <title>Glow & Run Tracker</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="./manifest.json" />
+  <meta name="theme-color" content="#7c6aff" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="GlowRun" />
+  <link rel="apple-touch-icon" href="./icon-192.png" />
+
+  <!-- SEO -->
+  <meta name="description" content="Daily running, skincare, haircare and diet habit tracker. Improve your 5K pace and glow up simultaneously." />
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #12121a;
+      --surface2: #1a1a26;
+      --surface3: #22223a;
+      --border: #2a2a40;
+      --accent: #7c6aff;
+      --accent2: #ff6a9e;
+      --accent3: #6affb4;
+      --accent4: #ffa96a;
+      --text: #e8e8f0;
+      --text2: #9090b0;
+      --text3: #60607a;
+      --red: #ff5f5f;
+      --green: #5fffaa;
+      --yellow: #ffe066;
+      --radius: 14px;
+      --radius-sm: 8px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 0 0 60px;
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, #1a0a3a 0%, #0a1a3a 50%, #0a2a1a 100%);
+      padding: 36px 24px 28px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .header::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 30% 50%, rgba(124,106,255,0.15), transparent 60%),
+                  radial-gradient(ellipse at 70% 50%, rgba(106,255,180,0.1), transparent 60%);
+    }
+    .header h1 {
+      font-size: 2rem; font-weight: 800; letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #7c6aff, #ff6a9e, #6affb4);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      position: relative;
+    }
+    .header p { color: var(--text2); margin-top: 8px; font-size: 0.9rem; position: relative; }
+    .date-badge {
+      display: inline-block; margin-top: 12px;
+      background: rgba(124,106,255,0.15); border: 1px solid rgba(124,106,255,0.3);
+      border-radius: 20px; padding: 4px 16px; font-size: 0.8rem; color: var(--accent);
+      position: relative;
+    }
+
+    /* Streak bar */
+    .streak-row {
+      display: flex; gap: 12px; padding: 16px 24px;
+      background: var(--surface); border-bottom: 1px solid var(--border);
+      overflow-x: auto; flex-wrap: wrap; justify-content: center;
+    }
+    .streak-card {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 10px 18px;
+      display: flex; align-items: center; gap: 10px; flex-shrink: 0;
+    }
+    .streak-icon { font-size: 1.3rem; }
+    .streak-info { line-height: 1.2; }
+    .streak-val { font-size: 1.1rem; font-weight: 700; color: var(--accent4); }
+    .streak-label { font-size: 0.72rem; color: var(--text2); }
+
+    /* Tabs */
+    .tabs {
+      display: flex; gap: 4px; padding: 16px 24px 0;
+      border-bottom: 1px solid var(--border);
+      overflow-x: auto;
+    }
+    .tab {
+      padding: 10px 20px; border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+      border: 1px solid transparent; border-bottom: none;
+      cursor: pointer; font-size: 0.85rem; font-weight: 600;
+      color: var(--text2); background: transparent;
+      transition: all 0.2s; white-space: nowrap;
+    }
+    .tab:hover { color: var(--text); background: var(--surface2); }
+    .tab.active {
+      background: var(--surface2); color: var(--accent);
+      border-color: var(--border); border-bottom-color: var(--surface2);
+    }
+
+    /* Content */
+    .content { padding: 24px; max-width: 900px; margin: 0 auto; }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* Section */
+    .section {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); margin-bottom: 20px; overflow: hidden;
+    }
+    .section-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 20px; background: var(--surface2);
+      border-bottom: 1px solid var(--border); cursor: pointer;
+    }
+    .section-title {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 700; font-size: 0.95rem;
+    }
+    .section-icon { font-size: 1.2rem; }
+    .section-progress {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .progress-bar {
+      width: 80px; height: 6px; background: var(--surface3);
+      border-radius: 3px; overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%; border-radius: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent3));
+      transition: width 0.4s ease;
+    }
+    .progress-text { font-size: 0.78rem; color: var(--text2); min-width: 36px; text-align: right; }
+
+    /* Checklist */
+    .checklist { padding: 8px 0; }
+    .check-item {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 12px 20px; border-bottom: 1px solid rgba(255,255,255,0.04);
+      cursor: pointer; transition: background 0.15s;
+      position: relative;
+    }
+    .check-item:last-child { border-bottom: none; }
+    .check-item:hover { background: rgba(124,106,255,0.05); }
+    .check-item.checked { opacity: 0.5; }
+    .check-item.checked .item-text { text-decoration: line-through; color: var(--text3); }
+    .check-box {
+      width: 22px; height: 22px; border-radius: 6px; flex-shrink: 0;
+      border: 2px solid var(--border); background: var(--surface2);
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s; margin-top: 1px;
+    }
+    .check-item.checked .check-box {
+      background: var(--accent3); border-color: var(--accent3);
+    }
+    .check-box::after {
+      content: ''; width: 6px; height: 10px;
+      border: 2px solid #0a0a0f; border-top: none; border-left: none;
+      transform: rotate(45deg) scale(0); transition: transform 0.15s;
+      margin-bottom: 2px;
+    }
+    .check-item.checked .check-box::after { transform: rotate(45deg) scale(1); }
+    .item-content { flex: 1; }
+    .item-text { font-size: 0.88rem; line-height: 1.4; color: var(--text); }
+    .item-note { font-size: 0.75rem; color: var(--text2); margin-top: 3px; }
+    .item-tag {
+      display: inline-block; padding: 2px 8px; border-radius: 10px;
+      font-size: 0.68rem; font-weight: 600; margin-left: 8px; vertical-align: middle;
+    }
+    .tag-skin { background: rgba(255,106,158,0.2); color: var(--accent2); }
+    .tag-run { background: rgba(124,106,255,0.2); color: var(--accent); }
+    .tag-diet { background: rgba(106,255,180,0.2); color: var(--accent3); }
+    .tag-hair { background: rgba(255,169,106,0.2); color: var(--accent4); }
+    .tag-jaw { background: rgba(255,224,102,0.2); color: var(--yellow); }
+
+    /* Don't items */
+    .dont-item {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 12px 20px; border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .dont-item:last-child { border-bottom: none; }
+    .dont-icon { font-size: 1rem; flex-shrink: 0; margin-top: 2px; }
+    .dont-text { font-size: 0.88rem; line-height: 1.4; }
+    .dont-reason { font-size: 0.74rem; color: var(--text2); margin-top: 3px; }
+
+    /* Weekly grid */
+    .week-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0; }
+    .day-header {
+      padding: 10px 4px; text-align: center;
+      font-size: 0.72rem; font-weight: 700; color: var(--text2);
+      background: var(--surface2); text-transform: uppercase;
+      border-bottom: 1px solid var(--border);
+    }
+    .day-header.today { color: var(--accent); }
+    .week-task {
+      display: flex; flex-direction: column; gap: 4px;
+      padding: 10px 6px;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .week-task:nth-child(7n) { border-right: none; }
+    .week-dot {
+      display: flex; align-items: center; gap: 6px;
+      padding: 5px 6px; border-radius: 6px;
+      cursor: pointer; transition: background 0.15s;
+      font-size: 0.72rem;
+    }
+    .week-dot:hover { background: var(--surface3); }
+    .week-dot.checked .dot-box { background: var(--accent3); border-color: var(--accent3); }
+    .week-dot.checked span { text-decoration: line-through; color: var(--text3); opacity: 0.6; }
+    .dot-box {
+      width: 14px; height: 14px; border-radius: 4px; flex-shrink: 0;
+      border: 2px solid var(--border); background: var(--surface2);
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s;
+    }
+    .dot-box::after {
+      content: '✓'; font-size: 0.5rem; color: #0a0a0f;
+      opacity: 0; transition: opacity 0.15s;
+    }
+    .week-dot.checked .dot-box::after { opacity: 1; }
+
+    /* Reset */
+    .reset-btn {
+      background: rgba(255,95,95,0.1); border: 1px solid rgba(255,95,95,0.3);
+      color: var(--red); border-radius: var(--radius-sm); padding: 8px 16px;
+      cursor: pointer; font-size: 0.8rem; font-family: 'Inter', sans-serif;
+      transition: all 0.2s;
+    }
+    .reset-btn:hover { background: rgba(255,95,95,0.2); }
+    .top-actions { display: flex; justify-content: flex-end; margin-bottom: 16px; gap: 10px; }
+
+    /* Overall progress */
+    .overall-card {
+      background: linear-gradient(135deg, rgba(124,106,255,0.1), rgba(106,255,180,0.08));
+      border: 1px solid rgba(124,106,255,0.2);
+      border-radius: var(--radius); padding: 20px; margin-bottom: 20px;
+      display: flex; gap: 20px; align-items: center; flex-wrap: wrap;
+    }
+    .overall-ring {
+      width: 90px; height: 90px; flex-shrink: 0;
+      position: relative;
+    }
+    .overall-ring svg { transform: rotate(-90deg); }
+    .overall-ring .ring-text {
+      position: absolute; inset: 0; display: flex;
+      flex-direction: column; align-items: center; justify-content: center;
+      transform: rotate(0deg);
+    }
+    .ring-pct { font-size: 1.3rem; font-weight: 800; color: var(--accent3); }
+    .ring-label { font-size: 0.65rem; color: var(--text2); }
+    .overall-info { flex: 1; }
+    .overall-title { font-weight: 700; font-size: 1rem; margin-bottom: 6px; }
+    .overall-sub { font-size: 0.82rem; color: var(--text2); line-height: 1.6; }
+
+    /* Info cards */
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+    @media (max-width: 600px) { .info-grid { grid-template-columns: 1fr; } }
+    .info-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 16px;
+    }
+    .info-card h4 { font-size: 0.85rem; font-weight: 700; margin-bottom: 10px; }
+    .info-list { list-style: none; }
+    .info-list li {
+      font-size: 0.8rem; color: var(--text2); padding: 5px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      display: flex; gap: 8px;
+    }
+    .info-list li:last-child { border-bottom: none; }
+    .info-list li::before { content: '→'; color: var(--accent3); flex-shrink: 0; }
+
+    /* Weekly overview label */
+    .week-section-label {
+      padding: 14px 20px 10px;
+      font-size: 0.78rem; color: var(--text2);
+      font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
+    }
+
+    /* Mobile scroll for week */
+    .week-scroll { overflow-x: auto; }
+
+    /* Collapsible */
+    .section-body { overflow: hidden; }
+    .collapsed .section-body { display: none; }
+    .chevron { transition: transform 0.2s; color: var(--text3); font-size: 0.8rem; }
+    .collapsed .chevron { transform: rotate(-90deg); }
+
+    /* Celebration */
+    .celebration {
+      position: fixed; top: 20px; right: 20px; z-index: 1000;
+      background: linear-gradient(135deg, var(--accent), var(--accent3));
+      border-radius: var(--radius); padding: 14px 20px;
+      font-weight: 700; font-size: 0.9rem; color: #fff;
+      animation: slideIn 0.3s ease, fadeOut 0.5s ease 2.5s forwards;
+      pointer-events: none;
+    }
+    @keyframes slideIn { from { transform: translateX(100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    @keyframes fadeOut { to { opacity: 0; transform: translateY(-10px); } }
+
+    /* Emoji for section colors */
+    .clr-skin { color: #ff6a9e; }
+    .clr-run { color: #7c6aff; }
+    .clr-diet { color: #6affb4; }
+    .clr-jaw { color: #ffe066; }
+    .clr-hair { color: #ffa96a; }
+    .clr-sleep { color: #6aaeff; }
+  </style>
+</head>
+<body>
+
+<!-- Install Banner (shown on Android Chrome) -->
+<div id="install-banner" style="display:none; position:fixed; bottom:0; left:0; right:0; z-index:9999;
+  background:linear-gradient(135deg,#1a0a3a,#0a1a3a); border-top:1px solid rgba(124,106,255,0.3);
+  padding:14px 20px; align-items:center; gap:12px; box-shadow:0 -8px 32px rgba(0,0,0,0.4);">
+  <div style="font-size:1.6rem;">📲</div>
+  <div style="flex:1;">
+    <div style="font-weight:700;font-size:0.9rem;color:#e8e8f0;">Install Glow & Run</div>
+    <div style="font-size:0.75rem;color:#9090b0;">Add to home screen for offline use</div>
+  </div>
+  <button id="install-btn" style="background:linear-gradient(135deg,#7c6aff,#6affb4);border:none;
+    border-radius:8px;padding:8px 16px;font-weight:700;font-size:0.82rem;color:#0a0a0f;
+    cursor:pointer;font-family:Inter,sans-serif;">Install</button>
+  <button id="install-close" style="background:none;border:none;color:#9090b0;
+    cursor:pointer;font-size:1.2rem;padding:4px;">✕</button>
+</div>
+
+<div class="header">
+  <h1>🏃 Glow & Run Tracker</h1>
+  <p>Your complete daily system — skin, fitness, diet & jawline</p>
+  <div class="date-badge" id="date-badge">Loading...</div>
+</div>
+
+<div class="streak-row" id="streak-row">
+  <div class="streak-card">
+    <div class="streak-icon">🔥</div>
+    <div class="streak-info">
+      <div class="streak-val" id="streak-val">0</div>
+      <div class="streak-label">Day Streak</div>
+    </div>
+  </div>
+  <div class="streak-card">
+    <div class="streak-icon">✅</div>
+    <div class="streak-info">
+      <div class="streak-val" id="today-pct">0%</div>
+      <div class="streak-label">Today Done</div>
+    </div>
+  </div>
+  <div class="streak-card">
+    <div class="streak-icon">📅</div>
+    <div class="streak-info">
+      <div class="streak-val" id="week-pct">0%</div>
+      <div class="streak-label">This Week</div>
+    </div>
+  </div>
+  <div class="streak-card">
+    <div class="streak-icon">🎯</div>
+    <div class="streak-info">
+      <div class="streak-val" id="total-checks">0</div>
+      <div class="streak-label">Total Checks</div>
+    </div>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('daily')">📋 Daily Routine</button>
+  <button class="tab" onclick="switchTab('weekly')">📅 Weekly Plan</button>
+  <button class="tab" onclick="switchTab('donts')">🚫 Don'ts</button>
+  <button class="tab" onclick="switchTab('reference')">📖 Reference</button>
+</div>
+
+<!-- DAILY TAB -->
+<div class="tab-panel active content" id="tab-daily">
+  <div class="overall-card">
+    <div class="overall-ring">
+      <svg width="90" height="90" viewBox="0 0 90 90">
+        <circle cx="45" cy="45" r="38" fill="none" stroke="#22223a" stroke-width="8"/>
+        <circle cx="45" cy="45" r="38" fill="none" stroke="url(#ringGrad)" stroke-width="8"
+          stroke-linecap="round" stroke-dasharray="238.76" id="ring-circle"
+          stroke-dashoffset="238.76" style="transition:stroke-dashoffset 0.5s ease"/>
+        <defs>
+          <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#7c6aff"/>
+            <stop offset="100%" stop-color="#6affb4"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <div class="ring-text">
+        <span class="ring-pct" id="ring-pct">0%</span>
+        <span class="ring-label">done</span>
+      </div>
+    </div>
+    <div class="overall-info">
+      <div class="overall-title">Today's Progress</div>
+      <div class="overall-sub" id="daily-motivation">Start ticking off your morning routine! Each habit compounds daily. 💪</div>
+    </div>
+  </div>
+
+  <div class="top-actions">
+    <button class="reset-btn" onclick="resetDaily()">↺ Reset Today</button>
+  </div>
+
+  <!-- AM ROUTINE -->
+  <div class="section" id="sec-am">
+    <div class="section-header" onclick="toggleSection('sec-am')">
+      <div class="section-title"><span class="section-icon">☀️</span> Morning Routine</div>
+      <div class="section-progress">
+        <div class="progress-bar"><div class="progress-fill" id="prog-am" style="width:0%"></div></div>
+        <div class="progress-text" id="txt-am">0/0</div>
+        <span class="chevron">▼</span>
+      </div>
+    </div>
+    <div class="section-body">
+    <div class="checklist" id="list-am">
+      <div class="check-item" onclick="toggle(this)" data-id="am1">
+        <div class="check-box"></div>
+        <div class="item-content">
+          <div class="item-text">💧 Drink 500ml water immediately on waking <span class="item-tag tag-diet">DIET</span></div>
+          <div class="item-note">Before coffee, before phone — first thing</div>
+        </div>
+      </div>
+      <div class="check-item" onclick="toggle(this)" data-id="am2">
+        <div class="check-box"></div>
+        <div class="item-content">
+          <div class="item-text">🧊 Splash face with cold water (30 sec) <span class="item-tag tag-skin">SKIN</span></div>
+          <div class="item-note">Reduces puffiness, tightens skin, wakes you up</div>
+        </div>
+      </div>
+      <div class="check-item" onclick="toggle(this)" data-id="am3">
+        <div class="check-box"></div>
+        <div class="item-content">
+          <div class="item-text">🧴 Apply Niacinamide 10% serum <span class="item-tag tag-skin">SKIN</span></div>
+          <div class="item-note">Wait 2 minutes before next step</div>
+        </div>
+      </div>
+      <div class="check-item" onclick="toggle(this)" data-id="am4">
+        <div class="check-box"></div>
+        <div class="item-content">
+          <div class="item-text">💦 Apply moisturizer (light, non-comedogenic) <span class="item-tag tag-skin">SKIN</span></div>
+          <div class="item-note">Cetaphil or equivalent</div>
+        </div>
+      </div>
+      <div class="check-item" onclick="toggle(this)" data-id="am5">
+        <div class="check-box"></div>
+        <div class="item-content">
+          <div class="item-text">☀️ Apply SPF 50 Sunscreen <span class="item-tag tag-skin">SKIN</span></div>
+          <div class="item-note">THE most important step. Every single day, even indoors.</div>
+        </div>
+      </div>
+      <div class="check-item" onclick="toggle(this)" data-id="am6">
+        <div class="check-box"></div>
+        <div class="item-content">
+          <div class="item-text">🫁 Mewing — set tongue position <span class="item-tag tag-jaw">JAW</span></div>
+          <div class="item-note">Entire tongue flat on roof of mouth. Maintain 24/7.</div>
+        </div>
+      </div>
+      <div class="check-item" onclick="toggle(this)" data-id="am7">
+        <div class="check-box"></div>
+        <div class="item-content">
+          <div class="item-text">🫖 Drink green tea (1 cup) <span class="item-tag tag-diet">DIET</span></div>
+          <div class="item-note">Anti-inflammatory, reduces puffiness, antioxidants</div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- THROUGHOUT DAY -->
+  <div class="section" id="sec-day">
+    <div class="section-header" onclick="toggleSection('sec-day')">
+      <div class="section-title"><span class="section-icon">🌤️</span> Throughout The Day</div>
+      <div class="section-progress">
+        <div class="progress-bar"><div class="progress-fill" id="prog-day" style="width:0%"></div></div>
+        <div class="progress-text" id="txt-day">0/0</div>
+        <span class="chevron">▼</span>
+      </div>
+    </div>
+    <div class="section-body">
+    <div class="checklist" id="list-day">
+      <div class="check-item" onclick="toggle(this)" data-id="day1">
+        <div class="check-box"></div>
+        <div class="item-content">
+          <div class="item-text">💧 3 to 3.5 litres of water (total for day) <span class="item-tag tag-diet">DIET</span></div>
+          <div class="item-note">Track via water bottle. Pale yellow urine = hydrated.</div>
+        </div>
+      </div>
+      <div class="check-item" onclick="toggle(this)" data-id="day2">
+        <div class="check-box"></div>
+        <div class="item-content">
+          <div class="item-text">🏃 Complete today's run <span class="item-tag tag-run">RUN</span></div>
+          <div class="item-note">Check your weekly schedule for today's run type</div>
+        </div>
+      </div>
+      <div class="check-item" onclick="toggle(this)" data-id="day3">
+        <div class="check-box"></div>
+        <div class="item-content">
+          <div class="item-text">🦷 Chew sugar-free gum for 15 mins <span class="item-tag tag-jaw">JAW</span></div>
+          <div class="item-note">Orbit/Happydent. Builds masseter muscle for jawline definition.</div>
+        </div>
+      </div>
+      <div class="check-item" onclick="toggle(this)" data-id="day4">
+        <div class="check-box"></div>
+        <div class="item-content">
+          <div class="item-text">🫁 Mewing maintained all day <span class="item-tag tag-jaw">JAW</span></div>
+          <div class="item-note">Tongue on roof of mouth, lips closed, teeth lightly touching</div>
+        </div>
+      </div>
+      <div class="check-item" onclick="toggle(this)" data-id="day5">
+        <div class="check-box"></div>
+        <div class="item-content">
+          <div class="item-text">🚫 No junk food / packaged snacks today <span class="item-tag tag-diet">DIET</span></div>
+          <div class="item-note">No chips, biscuits, instant noodles, fried food</div>
+        </div>
+      </div>
+      <div class="check-item" onclick="toggle(this)" data-id="day6">
+        <div class="check-box"></div>
+        <div class="item-content">
+          <div class="item-text">🚫 Did NOT touch face today <span class="item-tag tag-skin">SKIN</span></div>
+          <div class="item-note">Every touch transfers bacteria → more blackheads</div>
+        </div>
+      </div>
+      <div class="check-item" onclick="toggle(this)" data-id="day7">
+        <div class="check-box"></div>
+        <div class="item-content">
+          <div class="item-text">🥗 Ate clean (low sodium, low sugar) <span class="item-tag tag-diet">DIET</span></div>
+          <div class="item-note">Rice/roti + dal/egg + veggies. No added salt on food.</div>
+        </div>
+      </div>
+      <div class="check-item" onclick="toggle(this)" data-id="day8">
+        <div class="check-box"></div>
+        <div class="item-content">
+          <div class="item-text">🥚 Had protein (eggs/dal/chicken/curd) <span class="item-tag tag-diet">DIET</span></div>
+          <div class="item-note">Hair and skin are protein. Minimum 60g protein/day at your weight.</div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- PM ROUTINE -->
+  <div class="section" id="sec-pm">
+    <div class="section-header" onclick="toggleSection('sec-pm')">
+      <div class="section-title"><span class="section-icon">🌙</span> Evening / Night Routine</div>
+      <div class="section-progress">
+        <div class="progress-bar"><div class="progress-fill" id="prog-pm" style="width:0%"></div></div>
+        <div class="progress-text" id="txt-pm">0/0</div>
+        <span class="chevron">▼</span>
+      </div>
+    </div>
+    <div class="section-body">
+    <div class="checklist" id="list-pm">
+      <div class="check-item" onclick="toggle(this)" data-id="pm1">
+        <div class="check-box"></div>
+        <div class="item-content">
+          <div class="item-text">🧹 Oil cleanse / micellar water to remove sunscreen <span class="item-tag tag-skin">SKIN</span></div>
+          <div class="item-note">Step 1 of double cleanse. Dissolves SPF + sebum plugs.</div>
+        </div>
+      </div>
+      <div class="check-item" onclick="toggle(this)" data-id="pm2">
+        <div class="check-box"></div>
+        <div class="item-content">
+          <div class="item-text">🫧 Foam cleanser (Cetaphil / Minimalist) <span class="item-tag tag-skin">SKIN</span></div>
+          <div class="item-note">Step 2 of double cleanse. Gentle, no harsh scrubbing.</div>
+        </div>
+      </div>
+      <div class="check-item" onclick="toggle(this)" data-id="pm3">
+        <div class="check-box"></div>
+        <div class="item-content">
+          <div class="item-text">🔴 Salicylic Acid 2% on nose (Minimalist) <span class="item-tag tag-skin">SKIN</span></div>
+          <div class="item-note">Only on problem areas. BHA dissolves inside pores. 4–6 weeks for results.</div>
+        </div>
+      </div>
+      <div class="check-item" onclick="toggle(this)" data-id="pm4">
+        <div class="check-box"></div>
+        <div class="item-content">
+          <div class="item-text">🧴 Niacinamide 10% serum (wait 2 min) <span class="item-tag tag-skin">SKIN</span></div>
+          <div class="item-note">Controls oil, reduces puffiness, brightens skin tone</div>
+        </div>
+      </div>
+      <div class="check-item" onclick="toggle(this)" data-id="pm5">
+        <div class="check-box"></div>
+        <div class="item-content">
+          <div class="item-text">💦 Night moisturizer <span class="item-tag tag-skin">SKIN</span></div>
+          <div class="item-note">Lock in all the active ingredients</div>
+        </div>
+      </div>
+      <div class="check-item" onclick="toggle(this)" data-id="pm6">
+        <div class="check-box"></div>
+        <div class="item-content">
+          <div class="item-text">🪨 Gua sha / face massage (5 mins) <span class="item-tag tag-jaw">JAW</span></div>
+          <div class="item-note">Neck → jaw → ear (upward strokes). Drains lymphatic fluid. Do after moisturizer.</div>
+        </div>
+      </div>
+      <div class="check-item" onclick="toggle(this)" data-id="pm7">
+        <div class="check-box"></div>
+        <div class="item-content">
+          <div class="item-text">🛏️ In bed by 11 PM <span class="item-tag tag-skin">SLEEP</span></div>
+          <div class="item-note">Pre-midnight sleep = deeper recovery. Face fat, skin, hair all benefit.</div>
+        </div>
+      </div>
+      <div class="check-item" onclick="toggle(this)" data-id="pm8">
+        <div class="check-box"></div>
+        <div class="item-content">
+          <div class="item-text">😴 7.5 to 8 hours sleep <span class="item-tag tag-skin">SLEEP</span></div>
+          <div class="item-note">Elevate pillow slightly to reduce overnight facial fluid pooling</div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+<!-- WEEKLY TAB -->
+<div class="tab-panel content" id="tab-weekly">
+  <div class="top-actions">
+    <button class="reset-btn" onclick="resetWeekly()">↺ Reset This Week</button>
+  </div>
+
+  <!-- Running Schedule -->
+  <div class="section">
+    <div class="section-header" onclick="toggleSection('sec-run-week')">
+      <div class="section-title"><span class="section-icon clr-run">🏃</span> Weekly Running Schedule</div>
+      <div class="section-progress">
+        <div class="progress-bar"><div class="progress-fill" id="prog-run-week" style="width:0%"></div></div>
+        <div class="progress-text" id="txt-run-week">0/0</div>
+        <span class="chevron">▼</span>
+      </div>
+    </div>
+    <div class="section-body" id="sec-run-week">
+    <div class="week-scroll">
+    <div class="week-grid" id="run-week-grid">
+      <div class="day-header" id="dh-0">Mon</div>
+      <div class="day-header" id="dh-1">Tue</div>
+      <div class="day-header" id="dh-2">Wed</div>
+      <div class="day-header" id="dh-3">Thu</div>
+      <div class="day-header" id="dh-4">Fri</div>
+      <div class="day-header" id="dh-5">Sat</div>
+      <div class="day-header" id="dh-6">Sun</div>
+
+      <!-- Day tasks -->
+      <div class="week-task">
+        <div class="week-dot" onclick="toggleWeek(this)" data-wid="run-mon1">
+          <div class="dot-box"></div><span>Easy run 4–5km</span>
+        </div>
+        <div class="week-dot" onclick="toggleWeek(this)" data-wid="run-mon2">
+          <div class="dot-box"></div><span>Pace: 6:30–7:00/km</span>
+        </div>
+      </div>
+      <div class="week-task">
+        <div class="week-dot" onclick="toggleWeek(this)" data-wid="run-tue1">
+          <div class="dot-box"></div><span>Intervals 5–6km</span>
+        </div>
+        <div class="week-dot" onclick="toggleWeek(this)" data-wid="run-tue2">
+          <div class="dot-box"></div><span>8×400m fast reps</span>
+        </div>
+        <div class="week-dot" onclick="toggleWeek(this)" data-wid="run-tue3">
+          <div class="dot-box"></div><span>90s rest btwn each</span>
+        </div>
+      </div>
+      <div class="week-task">
+        <div class="week-dot" onclick="toggleWeek(this)" data-wid="run-wed1">
+          <div class="dot-box"></div><span>REST day</span>
+        </div>
+        <div class="week-dot" onclick="toggleWeek(this)" data-wid="run-wed2">
+          <div class="dot-box"></div><span>Walk / stretch only</span>
+        </div>
+      </div>
+      <div class="week-task">
+        <div class="week-dot" onclick="toggleWeek(this)" data-wid="run-thu1">
+          <div class="dot-box"></div><span>Tempo run 4km</span>
+        </div>
+        <div class="week-dot" onclick="toggleWeek(this)" data-wid="run-thu2">
+          <div class="dot-box"></div><span>Pace: 5:15–5:30/km</span>
+        </div>
+      </div>
+      <div class="week-task">
+        <div class="week-dot" onclick="toggleWeek(this)" data-wid="run-fri1">
+          <div class="dot-box"></div><span>REST day</span>
+        </div>
+      </div>
+      <div class="week-task">
+        <div class="week-dot" onclick="toggleWeek(this)" data-wid="run-sat1">
+          <div class="dot-box"></div><span>Long run 7–8km</span>
+        </div>
+        <div class="week-dot" onclick="toggleWeek(this)" data-wid="run-sat2">
+          <div class="dot-box"></div><span>Pace: 6:30–7:00/km</span>
+        </div>
+        <div class="week-dot" onclick="toggleWeek(this)" data-wid="run-sat3">
+          <div class="dot-box"></div><span>Progression finish</span>
+        </div>
+      </div>
+      <div class="week-task">
+        <div class="week-dot" onclick="toggleWeek(this)" data-wid="run-sun1">
+          <div class="dot-box"></div><span>Easy 3km / strides</span>
+        </div>
+        <div class="week-dot" onclick="toggleWeek(this)" data-wid="run-sun2">
+          <div class="dot-box"></div><span>Leg turnover drills</span>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- Skincare Weekly -->
+  <div class="section" id="sec-skin-week">
+    <div class="section-header" onclick="toggleSection('sec-skin-week')">
+      <div class="section-title"><span class="section-icon clr-skin">✨</span> Weekly Skincare Specials</div>
+      <div class="section-progress">
+        <div class="progress-bar"><div class="progress-fill" id="prog-skin-week" style="width:0%"></div></div>
+        <div class="progress-text" id="txt-skin-week">0/0</div>
+        <span class="chevron">▼</span>
+      </div>
+    </div>
+    <div class="section-body">
+    <div class="week-scroll">
+    <div class="week-grid">
+      <div class="day-header">Mon</div><div class="day-header">Tue</div>
+      <div class="day-header">Wed</div><div class="day-header">Thu</div>
+      <div class="day-header">Fri</div><div class="day-header">Sat</div>
+      <div class="day-header">Sun</div>
+
+      <div class="week-task">
+        <div class="week-dot" onclick="toggleWeek(this)" data-wid="sk-mon1">
+          <div class="dot-box"></div><span>Daily routine ✅</span>
+        </div>
+      </div>
+      <div class="week-task">
+        <div class="week-dot" onclick="toggleWeek(this)" data-wid="sk-tue1">
+          <div class="dot-box"></div><span>Daily routine ✅</span>
+        </div>
+        <div class="week-dot" onclick="toggleWeek(this)" data-wid="sk-tue2">
+          <div class="dot-box"></div><span>🟤 Clay mask nose</span>
+        </div>
+      </div>
+      <div class="week-task">
+        <div class="week-dot" onclick="toggleWeek(this)" data-wid="sk-wed1">
+          <div class="dot-box"></div><span>Daily routine ✅</span>
+        </div>
+      </div>
+      <div class="week-task">
+        <div class="week-dot" onclick="toggleWeek(this)" data-wid="sk-thu1">
+          <div class="dot-box"></div><span>Daily routine ✅</span>
+        </div>
+        <div class="week-dot" onclick="toggleWeek(this)" data-wid="sk-thu2">
+          <div class="dot-box"></div><span>🟤 Clay mask nose</span>
+        </div>
+      </div>
+      <div class="week-task">
+        <div class="week-dot" onclick="toggleWeek(this)" data-wid="sk-fri1">
+          <div class="dot-box"></div><span>Daily routine ✅</span>
+        </div>
+      </div>
+      <div class="week-task">
+        <div class="week-dot" onclick="toggleWeek(this)" data-wid="sk-sat1">
+          <div class="dot-box"></div><span>Daily routine ✅</span>
+        </div>
+        <div class="week-dot" onclick="toggleWeek(this)" data-wid="sk-sat2">
+          <div class="dot-box"></div><span>Change pillowcase</span>
+        </div>
+      </div>
+      <div class="week-task">
+        <div class="week-dot" onclick="toggleWeek(this)" data-wid="sk-sun1">
+          <div class="dot-box"></div><span>Daily routine ✅</span>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- Hair Weekly -->
+  <div class="section" id="sec-hair-week">
+    <div class="section-header" onclick="toggleSection('sec-hair-week')">
+      <div class="section-title"><span class="section-icon clr-hair">💇</span> Weekly Hair Schedule</div>
+      <div class="section-progress">
+        <div class="progress-bar"><div class="progress-fill" id="prog-hair-week" style="width:0%"></div></div>
+        <div class="progress-text" id="txt-hair-week">0/0</div>
+        <span class="chevron">▼</span>
+      </div>
+    </div>
+    <div class="section-body">
+    <div class="week-scroll">
+    <div class="week-grid">
+      <div class="day-header">Mon</div><div class="day-header">Tue</div>
+      <div class="day-header">Wed</div><div class="day-header">Thu</div>
+      <div class="day-header">Fri</div><div class="day-header">Sat</div>
+      <div class="day-header">Sun</div>
+
+      <div class="week-task">
+        <div class="week-dot" onclick="toggleWeek(this)" data-wid="hr-mon1">
+          <div class="dot-box"></div><span>Hair wash #1</span>
+        </div>
+        <div class="week-dot" onclick="toggleWeek(this)" data-wid="hr-mon2">
+          <div class="dot-box"></div><span>Shampoo scalp only</span>
+        </div>
+        <div class="week-dot" onclick="toggleWeek(this)" data-wid="hr-mon3">
+          <div class="dot-box"></div><span>Conditioner ends only</span>
+        </div>
+        <div class="week-dot" onclick="toggleWeek(this)" data-wid="hr-mon4">
+          <div class="dot-box"></div><span>Cool rinse to finish</span>
+        </div>
+      </div>
+      <div class="week-task">
+        <div class="week-dot" onclick="toggleWeek(this)" data-wid="hr-tue1">
+          <div class="dot-box"></div><span>—</span>
+        </div>
+      </div>
+      <div class="week-task">
+        <div class="week-dot" onclick="toggleWeek(this)" data-wid="hr-wed1">
+          <div class="dot-box"></div><span>Hair wash #2</span>
+        </div>
+        <div class="week-dot" onclick="toggleWeek(this)" data-wid="hr-wed2">
+          <div class="dot-box"></div><span>Shampoo scalp only</span>
+        </div>
+        <div class="week-dot" onclick="toggleWeek(this)" data-wid="hr-wed3">
+          <div class="dot-box"></div><span>Conditioner ends only</span>
+        </div>
+      </div>
+      <div class="week-task">
+        <div class="week-dot" onclick="toggleWeek(this)" data-wid="hr-thu1">
+          <div class="dot-box"></div><span>—</span>
+        </div>
+      </div>
+      <div class="week-task">
+        <div class="week-dot" onclick="toggleWeek(this)" data-wid="hr-fri1">
+          <div class="dot-box"></div><span>🛢️ Scalp oil massage</span>
+        </div>
+        <div class="week-dot" onclick="toggleWeek(this)" data-wid="hr-fri2">
+          <div class="dot-box"></div><span>Coconut/castor oil</span>
+        </div>
+        <div class="week-dot" onclick="toggleWeek(this)" data-wid="hr-fri3">
+          <div class="dot-box"></div><span>15 min massage</span>
+        </div>
+      </div>
+      <div class="week-task">
+        <div class="week-dot" onclick="toggleWeek(this)" data-wid="hr-sat1">
+          <div class="dot-box"></div><span>Hair wash #3</span>
+        </div>
+        <div class="week-dot" onclick="toggleWeek(this)" data-wid="hr-sat2">
+          <div class="dot-box"></div><span>Wash out oil</span>
+        </div>
+        <div class="week-dot" onclick="toggleWeek(this)" data-wid="hr-sat3">
+          <div class="dot-box"></div><span>Deep condition</span>
+        </div>
+      </div>
+      <div class="week-task">
+        <div class="week-dot" onclick="toggleWeek(this)" data-wid="hr-sun1">
+          <div class="dot-box"></div><span>—</span>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+<!-- DON'TS TAB -->
+<div class="tab-panel content" id="tab-donts">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title"><span class="section-icon">🍟</span> Diet Don'ts — Cut These Out</div>
+    </div>
+    <div class="checklist">
+      <div class="dont-item">
+        <div class="dont-icon">🧂</div>
+        <div><div class="dont-text">Extra salt & high-sodium food (chips, packaged snacks, instant noodles)</div>
+        <div class="dont-reason">Causes massive water retention in face → puffiness and soft jaw</div></div>
+      </div>
+      <div class="dont-item">
+        <div class="dont-icon">🍬</div>
+        <div><div class="dont-text">Sugar — cold drinks, biscuits, sweets, fruit juice, desserts</div>
+        <div class="dont-reason">Insulin spike → inflammation → puffiness + oilier skin + more blackheads</div></div>
+      </div>
+      <div class="dont-item">
+        <div class="dont-icon">🍺</div>
+        <div><div class="dont-text">Alcohol — completely eliminate</div>
+        <div class="dont-reason">Dehydrates skin, causes facial bloating, destroys sleep quality</div></div>
+      </div>
+      <div class="dont-item">
+        <div class="dont-icon">🥛</div>
+        <div><div class="dont-text">Excess dairy (especially milk) — try cutting for 3 weeks</div>
+        <div class="dont-reason">Hormones in milk can worsen acne and blackheads for many people</div></div>
+      </div>
+      <div class="dont-item">
+        <div class="dont-icon">🍞</div>
+        <div><div class="dont-text">Refined carbs — white bread, maida products, too much white rice</div>
+        <div class="dont-reason">Spikes insulin → triggers oilier skin</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title"><span class="section-icon">🚫</span> Skincare Don'ts — Stop Immediately</div>
+    </div>
+    <div class="checklist">
+      <div class="dont-item">
+        <div class="dont-icon">🤚</div>
+        <div><div class="dont-text">Touching your face constantly</div>
+        <div class="dont-reason">Transfers bacteria and oils from hands → clogs pores → blackheads every time</div></div>
+      </div>
+      <div class="dont-item">
+        <div class="dont-icon">😖</div>
+        <div><div class="dont-text">Squeezing blackheads / pimples</div>
+        <div class="dont-reason">Pushes bacteria deeper, causes permanent scarring and enlarged pores</div></div>
+      </div>
+      <div class="dont-item">
+        <div class="dont-icon">🩹</div>
+        <div><div class="dont-text">Using pore strips</div>
+        <div class="dont-reason">Only removes the top, root stays. Damages skin. Pores look bigger after.</div></div>
+      </div>
+      <div class="dont-item">
+        <div class="dont-icon">🧽</div>
+        <div><div class="dont-text">Harsh scrubs / over-exfoliating</div>
+        <div class="dont-reason">Micro-tears in skin. As defence, skin overproduces oil → MORE blackheads</div></div>
+      </div>
+      <div class="dont-item">
+        <div class="dont-icon">🚿</div>
+        <div><div class="dont-text">Washing face more than 2x a day</div>
+        <div class="dont-reason">Strips natural oils → skin panics and produces more oil → cycle worsens</div></div>
+      </div>
+      <div class="dont-item">
+        <div class="dont-icon">☀️</div>
+        <div><div class="dont-text">Skipping sunscreen — even one day</div>
+        <div class="dont-reason">1 day of UV exposure undoes weeks of skincare. SPF = non-negotiable.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title"><span class="section-icon">💇</span> Hair Don'ts</div>
+    </div>
+    <div class="checklist">
+      <div class="dont-item">
+        <div class="dont-icon">🔥</div>
+        <div><div class="dont-text">Hot showers on scalp</div>
+        <div class="dont-reason">Destroys scalp health, strips natural oils, causes dry and frizzy hair</div></div>
+      </div>
+      <div class="dont-item">
+        <div class="dont-icon">🧣</div>
+        <div><div class="dont-text">Rubbing hair aggressively with towel</div>
+        <div class="dont-reason">Causes breakage and frizz. Pat dry only, very gently.</div></div>
+      </div>
+      <div class="dont-item">
+        <div class="dont-icon">🪮</div>
+        <div><div class="dont-text">Combing wet hair with fine-tooth comb</div>
+        <div class="dont-reason">Hair is most fragile when wet. Use wide-tooth comb only.</div></div>
+      </div>
+      <div class="dont-item">
+        <div class="dont-icon">🧴</div>
+        <div><div class="dont-text">Hair gels with alcohol / SLS shampoos daily</div>
+        <div class="dont-reason">Dries and damages hair over time. Switch to mild SLS-free shampoo.</div></div>
+      </div>
+      <div class="dont-item">
+        <div class="dont-icon">💦</div>
+        <div><div class="dont-text">Washing hair every day</div>
+        <div class="dont-reason">Scalp needs its natural oils. Over-washing triggers more oil production.</div></div>
+      </div>
+      <div class="dont-item">
+        <div class="dont-icon">🏃</div>
+        <div><div class="dont-text">Leaving post-run sweat on scalp for hours</div>
+        <div class="dont-reason">Sweat + heat damages scalp. Rinse within 30–45 min after hard runs.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title"><span class="section-icon">🏃</span> Running Don'ts</div>
+    </div>
+    <div class="checklist">
+      <div class="dont-item">
+        <div class="dont-icon">💨</div>
+        <div><div class="dont-text">Starting any race or run too fast</div>
+        <div class="dont-reason">First 3 km determines last 3 km. Going out too fast = wall at the end</div></div>
+      </div>
+      <div class="dont-item">
+        <div class="dont-icon">👟</div>
+        <div><div class="dont-text">Wearing new shoes on race day</div>
+        <div class="dont-reason">Guaranteed blisters. Always race in broken-in shoes.</div></div>
+      </div>
+      <div class="dont-item">
+        <div class="dont-icon">🧪</div>
+        <div><div class="dont-text">Trying new food/gel on race day</div>
+        <div class="dont-reason">GI distress mid-race. Race with what you've trained with only.</div></div>
+      </div>
+      <div class="dont-item">
+        <div class="dont-icon">🍽️</div>
+        <div><div class="dont-text">Eating a huge meal before a run</div>
+        <div class="dont-reason">Cramps, nausea, sluggishness. 2 hrs min gap after any real meal.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- REFERENCE TAB -->
+<div class="tab-panel content" id="tab-reference">
+  <div class="info-grid">
+    <div class="info-card">
+      <h4>☀️ AM Skincare Order</h4>
+      <ul class="info-list">
+        <li>Cold water rinse (no cleanser)</li>
+        <li>Niacinamide 10% serum (wait 2 min)</li>
+        <li>Light moisturizer</li>
+        <li>SPF 50 sunscreen ← most important</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h4>🌙 PM Skincare Order</h4>
+      <ul class="info-list">
+        <li>Oil cleanser / micellar water</li>
+        <li>Foam cleanser (Cetaphil)</li>
+        <li>Salicylic acid 2% on nose only</li>
+        <li>Niacinamide 10% serum</li>
+        <li>Moisturizer</li>
+        <li>Gua sha massage (5 min)</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h4>🏃 Pace Reference</h4>
+      <ul class="info-list">
+        <li>Easy / recovery: 6:45–7:15/km</li>
+        <li>Tempo: 5:15–5:30/km</li>
+        <li>5K race target: 5:00/km</li>
+        <li>10K race target: 6:00/km</li>
+        <li>Half marathon: 7:00/km</li>
+        <li>400m interval: ~2:10–2:20</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h4>🛍️ Product Shopping List</h4>
+      <ul class="info-list">
+        <li>Cetaphil Foam Cleanser (₹350)</li>
+        <li>Minimalist Salicylic Acid 2% (₹300)</li>
+        <li>Minimalist Niacinamide 10% (₹350)</li>
+        <li>Cetaphil Moisturizing Lotion (₹450)</li>
+        <li>Minimalist / Re'equil SPF 50 (₹400)</li>
+        <li>Multani Mitti clay mask (₹100)</li>
+        <li>Gua sha stone (₹300)</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h4>🫁 Mewing Technique</h4>
+      <ul class="info-list">
+        <li>Entire tongue flat on roof of mouth</li>
+        <li>Tip touches behind front teeth</li>
+        <li>Lips closed, not pressed tight</li>
+        <li>Teeth lightly touching or 1mm gap</li>
+        <li>Breathe through nose only</li>
+        <li>Results in 3–6 months consistency</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h4>📅 Result Timeline</h4>
+      <ul class="info-list">
+        <li>Week 1: Less puffiness (sodium cut)</li>
+        <li>Week 2–3: Cleaner, less oily skin</li>
+        <li>Week 4–6: Blackheads reducing</li>
+        <li>Month 2: Jawline more defined</li>
+        <li>Month 3–4: Noticeable transformation</li>
+        <li>Month 6+: Mewing results visible</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h4>🥗 Eat More Of</h4>
+      <ul class="info-list">
+        <li>Eggs (skin + hair protein)</li>
+        <li>Green tea (anti-inflammatory)</li>
+        <li>Amla / citrus (Vitamin C)</li>
+        <li>Walnuts / flaxseed (Omega-3)</li>
+        <li>Pumpkin seeds (Zinc → less oil)</li>
+        <li>Banana, sweet potato (carbs for runs)</li>
+        <li>Curd / yogurt (gut health)</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h4>💇 Hair Wash Routine</h4>
+      <ul class="info-list">
+        <li>Wash 3x per week (Mon, Wed, Sat)</li>
+        <li>Shampoo scalp only, not lengths</li>
+        <li>Conditioner on ends only, not scalp</li>
+        <li>Cool rinse to close cuticle</li>
+        <li>Pat dry gently, never rub</li>
+        <li>Oil massage every Friday (15 min)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ---- State ----
+  const TODAY_KEY = () => new Date().toISOString().slice(0,10);
+  const WEEK_KEY = () => {
+    const d = new Date(); const day = d.getDay();
+    const mon = new Date(d); mon.setDate(d.getDate() - (day === 0 ? 6 : day - 1));
+    return mon.toISOString().slice(0,10);
+  };
+
+  function loadState(key) {
+    try { return JSON.parse(localStorage.getItem(key)) || {}; } catch { return {}; }
+  }
+  function saveState(key, state) {
+    localStorage.setItem(key, JSON.stringify(state));
+  }
+
+  const dailyKey = 'daily_' + TODAY_KEY();
+  const weeklyKey = 'weekly_' + WEEK_KEY();
+  let dailyState = loadState(dailyKey);
+  let weeklyState = loadState(weeklyKey);
+
+  // ---- Date display ----
+  const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const now = new Date();
+  document.getElementById('date-badge').textContent =
+    days[now.getDay()] + ', ' + now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
+
+  // Highlight today's column
+  const todayCol = now.getDay() === 0 ? 6 : now.getDay() - 1;
+  const dh = document.getElementById('dh-' + todayCol);
+  if (dh) dh.classList.add('today');
+
+  // ---- Tabs ----
+  function switchTab(name) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  // ---- Collapsible sections ----
+  function toggleSection(id) {
+    const sec = document.getElementById(id);
+    if (sec) sec.classList.toggle('collapsed');
+  }
+
+  // ---- Daily checks ----
+  function toggle(el) {
+    const id = el.dataset.id;
+    const checked = !dailyState[id];
+    dailyState[id] = checked;
+    saveState(dailyKey, dailyState);
+    el.classList.toggle('checked', checked);
+    updateAllProgress();
+    if (checked) celebrate();
+  }
+
+  function celebrate() {
+    const msgs = ['Great habit! 🔥', 'Keep going! 💪', 'That\'s the way! ✅', 'Consistency wins! 🏆', 'You\'re killing it! 🎯'];
+    const msg = msgs[Math.floor(Math.random() * msgs.length)];
+    const el = document.createElement('div');
+    el.className = 'celebration';
+    el.textContent = msg;
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 3200);
+  }
+
+  // ---- Weekly checks ----
+  function toggleWeek(el) {
+    const id = el.dataset.wid;
+    const checked = !weeklyState[id];
+    weeklyState[id] = checked;
+    saveState(weeklyKey, weeklyState);
+    el.classList.toggle('checked', checked);
+    updateAllProgress();
+  }
+
+  // ---- Progress ----
+  function sectionProgress(listId, progId, txtId) {
+    const items = document.querySelectorAll('#' + listId + ' .check-item');
+    if (!items.length) return { done: 0, total: 0 };
+    const total = items.length;
+    const done = [...items].filter(i => i.classList.contains('checked')).length;
+    const pct = total ? (done / total * 100) : 0;
+    const prog = document.getElementById(progId);
+    const txt = document.getElementById(txtId);
+    if (prog) prog.style.width = pct + '%';
+    if (txt) txt.textContent = done + '/' + total;
+    return { done, total };
+  }
+
+  function weekSectionProgress(prefix, progId, txtId) {
+    const items = document.querySelectorAll('[data-wid^="' + prefix + '"]');
+    if (!items.length) return { done: 0, total: 0 };
+    const total = items.length;
+    const done = [...items].filter(i => i.classList.contains('checked')).length;
+    const pct = total ? (done / total * 100) : 0;
+    const prog = document.getElementById(progId);
+    const txt = document.getElementById(txtId);
+    if (prog) prog.style.width = pct + '%';
+    if (txt) txt.textContent = done + '/' + total;
+    return { done, total };
+  }
+
+  function updateAllProgress() {
+    const am = sectionProgress('list-am', 'prog-am', 'txt-am');
+    const day = sectionProgress('list-day', 'prog-day', 'txt-day');
+    const pm = sectionProgress('list-pm', 'prog-pm', 'txt-pm');
+
+    const totalDone = am.done + day.done + pm.done;
+    const totalItems = am.total + day.total + pm.total;
+    const pct = totalItems ? Math.round(totalDone / totalItems * 100) : 0;
+
+    document.getElementById('ring-pct').textContent = pct + '%';
+    document.getElementById('today-pct').textContent = pct + '%';
+    const circle = document.getElementById('ring-circle');
+    const circumference = 238.76;
+    circle.style.strokeDashoffset = circumference * (1 - pct / 100);
+
+    // Motivation message
+    const msgs = [
+      'Start ticking off your morning routine! Each habit compounds daily. 💪',
+      'Good start! Morning skincare protects all your other work. ☀️',
+      'You\'re building momentum. Consistency is the only strategy. 🔥',
+      'Halfway there! Your skin and body are noticing. 💪',
+      'Over halfway! Real change happens in weeks 4–6. Stay locked in. 🎯',
+      'Almost done! These small habits = jaw definition + clear skin. 🏆',
+      'Nearly perfect day! Look in the mirror in 60 days. 👑',
+      '100%! Perfect day. This is what transformation looks like. 🌟'
+    ];
+    const idx = Math.min(Math.floor(pct / 15), msgs.length - 1);
+    document.getElementById('daily-motivation').textContent = msgs[idx];
+
+    // Weekly
+    const runW = weekSectionProgress('run-', 'prog-run-week', 'txt-run-week');
+    const skW = weekSectionProgress('sk-', 'prog-skin-week', 'txt-skin-week');
+    const hrW = weekSectionProgress('hr-', 'prog-hair-week', 'txt-hair-week');
+
+    const totalWeekDone = runW.done + skW.done + hrW.done;
+    const totalWeekItems = runW.total + skW.total + hrW.total;
+    const weekPct = totalWeekItems ? Math.round(totalWeekDone / totalWeekItems * 100) : 0;
+    document.getElementById('week-pct').textContent = weekPct + '%';
+
+    // Total checks ever
+    let total = 0;
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key && (key.startsWith('daily_') || key.startsWith('weekly_'))) {
+        const state = loadState(key);
+        total += Object.values(state).filter(Boolean).length;
+      }
+    }
+    document.getElementById('total-checks').textContent = total;
+
+    // Streak
+    updateStreak(pct === 100);
+  }
+
+  function updateStreak(todayComplete) {
+    let streak = parseInt(localStorage.getItem('streak_count') || '0');
+    const lastStreakDay = localStorage.getItem('streak_last_day');
+    const today = TODAY_KEY();
+
+    if (lastStreakDay !== today) {
+      const yesterday = new Date(); yesterday.setDate(yesterday.getDate() - 1);
+      const yKey = yesterday.toISOString().slice(0,10);
+      if (lastStreakDay === yKey && todayComplete) {
+        streak++; localStorage.setItem('streak_count', streak); localStorage.setItem('streak_last_day', today);
+      } else if (todayComplete) {
+        streak = 1; localStorage.setItem('streak_count', streak); localStorage.setItem('streak_last_day', today);
+      }
+    }
+    document.getElementById('streak-val').textContent = streak;
+  }
+
+  // ---- Restore states ----
+  function restoreDailyState() {
+    document.querySelectorAll('.check-item[data-id]').forEach(el => {
+      if (dailyState[el.dataset.id]) el.classList.add('checked');
+    });
+  }
+  function restoreWeeklyState() {
+    document.querySelectorAll('.week-dot[data-wid]').forEach(el => {
+      if (weeklyState[el.dataset.wid]) el.classList.add('checked');
+    });
+  }
+
+  // ---- Reset ----
+  function resetDaily() {
+    if (!confirm('Reset today\'s checklist?')) return;
+    dailyState = {};
+    saveState(dailyKey, dailyState);
+    document.querySelectorAll('.check-item').forEach(el => el.classList.remove('checked'));
+    updateAllProgress();
+  }
+  function resetWeekly() {
+    if (!confirm('Reset this week\'s checklist?')) return;
+    weeklyState = {};
+    saveState(weeklyKey, weeklyState);
+    document.querySelectorAll('.week-dot').forEach(el => el.classList.remove('checked'));
+    updateAllProgress();
+  }
+
+  // ---- Init ----
+  restoreDailyState();
+  restoreWeeklyState();
+  updateAllProgress();
+
+  // ---- PWA Service Worker ----
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js').catch(() => {});
+    });
+  }
+
+  // ---- Install Banner ----
+  let deferredPrompt;
+  const installBanner = document.getElementById('install-banner');
+  const installBtn = document.getElementById('install-btn');
+  const installClose = document.getElementById('install-close');
+
+  window.addEventListener('beforeinstallprompt', e => {
+    e.preventDefault();
+    deferredPrompt = e;
+    if (installBanner && !localStorage.getItem('install-dismissed')) {
+      installBanner.style.display = 'flex';
+    }
+  });
+
+  if (installBtn) {
+    installBtn.addEventListener('click', async () => {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') installBanner.style.display = 'none';
+      deferredPrompt = null;
+    });
+  }
+
+  if (installClose) {
+    installClose.addEventListener('click', () => {
+      installBanner.style.display = 'none';
+      localStorage.setItem('install-dismissed', '1');
+    });
+  }
+</script>
+</body>
+</html>
