@@ -434,6 +434,80 @@
       max-width: 140px; transition: border-color 0.2s; }
     .te-input:focus { outline: none; border-color: var(--accent); }
     .te-input::placeholder { color: var(--text3); }
+
+    /* ===== BATHE TAB ===== */
+    .bathe-hero {
+      background: linear-gradient(135deg, rgba(106,174,255,0.12), rgba(106,255,180,0.06));
+      border: 1px solid rgba(106,174,255,0.25); border-radius: var(--radius);
+      padding: 20px; margin-bottom: 16px;
+    }
+    .bathe-title { font-size: 1.3rem; font-weight: 800; margin-bottom: 4px;
+      background: linear-gradient(135deg,#6aaeff,#6affb4); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .bathe-sub { font-size: 0.82rem; color: var(--text2); margin-bottom: 14px; }
+    .bathe-freq-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
+    @media(max-width:500px){ .bathe-freq-grid { grid-template-columns: 1fr 1fr; } }
+    .bfq-card { background: var(--surface2); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 10px 12px; }
+    .bfq-freq { font-size: 0.7rem; font-weight: 700; color: var(--accent3);
+      text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 3px; }
+    .bfq-what { font-size: 0.78rem; color: var(--text); }
+    .bathe-step-num { width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem; font-weight: 800; margin-top: 2px; }
+    .sn-pre  { background: rgba(255,224,102,0.2); color: var(--yellow); }
+    .sn-dur  { background: rgba(106,174,255,0.2); color: #6aaeff; }
+    .sn-post { background: rgba(106,255,180,0.2); color: var(--accent3); }
+    .sn-wk   { background: rgba(255,106,158,0.2); color: var(--accent2); }
+    .bathe-step-content { flex: 1; }
+    .bathe-step-title { font-size: 0.88rem; font-weight: 600; color: var(--text); }
+    .bathe-step-note { font-size: 0.76rem; color: var(--text2); margin-top: 3px; line-height: 1.5; }
+    .bathe-check-item { display: flex; align-items: flex-start; gap: 12px;
+      padding: 12px 20px; border-bottom: 1px solid rgba(255,255,255,0.04);
+      cursor: pointer; transition: background 0.15s; }
+    .bathe-check-item:last-child { border-bottom: none; }
+    .bathe-check-item:hover { background: rgba(106,174,255,0.05); }
+    .bathe-check-item.bchecked { opacity: 0.5; }
+    .bathe-check-item.bchecked .bathe-step-title { text-decoration: line-through; color: var(--text3); }
+    .b-box { width: 22px; height: 22px; border-radius: 6px; flex-shrink: 0;
+      border: 2px solid var(--border); background: var(--surface2);
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s; margin-top: 2px; }
+    .bathe-check-item.bchecked .b-box { background: #6aaeff; border-color: #6aaeff; }
+    .b-box::after { content:''; width:6px; height:10px;
+      border:2px solid #0a0a0f; border-top:none; border-left:none;
+      transform:rotate(45deg) scale(0); transition:transform 0.15s; margin-bottom:2px; }
+    .bathe-check-item.bchecked .b-box::after { transform:rotate(45deg) scale(1); }
+    .temp-chip { display:inline-block; padding:2px 8px; border-radius:8px;
+      font-size:0.7rem; font-weight:700; margin-left:6px; vertical-align:middle; }
+    .tc-cold  { background:rgba(106,174,255,0.2); color:#6aaeff; }
+    .tc-warm  { background:rgba(255,169,106,0.2); color:var(--accent4); }
+    .tc-lk    { background:rgba(106,255,180,0.15); color:var(--accent3); }
+    .soap-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; padding:16px 20px; }
+    @media(max-width:480px){ .soap-grid { grid-template-columns:1fr; } }
+    .soap-card { background:var(--surface2); border:1px solid var(--border);
+      border-radius:var(--radius-sm); padding:12px; }
+    .soap-card h5 { font-size:0.8rem; font-weight:700; margin-bottom:6px; }
+    .soap-card ul { list-style:none; }
+    .soap-card li { font-size:0.76rem; color:var(--text2); padding:3px 0;
+      border-bottom:1px solid rgba(255,255,255,0.04); display:flex; gap:6px; align-items:flex-start; }
+    .soap-card li:last-child { border-bottom:none; }
+    .soap-card li::before { flex-shrink:0; margin-top:1px; }
+    .soap-good::before { content:'✅'; }
+    .soap-bad::before  { content:'❌'; }
+    .acv-alt-grid { display:flex; flex-direction:column; gap:10px; padding:16px 20px; }
+    .acv-card { background:var(--surface2); border:1px solid var(--border);
+      border-radius:var(--radius-sm); padding:14px; display:flex; gap:12px; align-items:flex-start; }
+    .acv-icon { font-size:1.6rem; flex-shrink:0; }
+    .acv-info h5 { font-size:0.85rem; font-weight:700; margin-bottom:4px; }
+    .acv-info p { font-size:0.78rem; color:var(--text2); line-height:1.5; margin-bottom:4px; }
+    .acv-tag { display:inline-block; padding:2px 8px; border-radius:8px; font-size:0.68rem; font-weight:700; }
+    .acv-free { background:rgba(106,255,180,0.15); color:var(--accent3); }
+    .acv-cheap { background:rgba(255,224,102,0.15); color:var(--yellow); }
+    .acv-order { background:rgba(124,106,255,0.15); color:var(--accent); }
+    .hw-tips { display:flex; flex-direction:column; gap:6px; padding:14px 20px; }
+    .hw-tip { display:flex; gap:10px; font-size:0.82rem; color:var(--text2); padding:8px 10px;
+      background:var(--surface2); border-radius:var(--radius-sm); align-items:flex-start; }
+    .hw-tip-icon { font-size:1rem; flex-shrink:0; }
   </style>
 </head>
 <body>
@@ -495,6 +569,7 @@
   <button class="tab active" onclick="switchTab('daily')">📋 Daily Routine</button>
   <button class="tab" onclick="switchTab('weekly')">📅 Weekly Plan</button>
   <button class="tab" onclick="switchTab('speed')">⚡ Speed Plan</button>
+  <button class="tab" onclick="switchTab('bathe')">🚿 Bathe</button>
   <button class="tab" onclick="switchTab('donts')">🚫 Don'ts</button>
   <button class="tab" onclick="switchTab('reference')">📖 Reference</button>
 </div>
@@ -1564,6 +1639,339 @@
 </div>
 <!-- END SPEED PLAN TAB -->
 
+<!-- BATHE TAB -->
+<div class="tab-panel content" id="tab-bathe">
+
+  <div class="bathe-hero">
+    <div class="bathe-title">🚿 Bathing Guide — Hard Water Edition</div>
+    <div class="bathe-sub">Campus hard water damages hair over time. Follow this to counter it fully.</div>
+    <div class="bathe-freq-grid">
+      <div class="bfq-card"><div class="bfq-freq">Every Day</div><div class="bfq-what">Body wash + face rinse</div></div>
+      <div class="bfq-card"><div class="bfq-freq">3× per Week</div><div class="bfq-what">Full hair wash (Mon · Wed · Sat)</div></div>
+      <div class="bfq-card"><div class="bfq-freq">1× per Week</div><div class="bfq-what">ACV / lemon rinse (mineral removal)</div></div>
+      <div class="bfq-card"><div class="bfq-freq">1× per Week</div><div class="bfq-what">Scalp oil massage before wash</div></div>
+      <div class="bfq-card"><div class="bfq-freq">Never</div><div class="bfq-what">Hot water on scalp or face</div></div>
+      <div class="bfq-card"><div class="bfq-freq">Post-Run</div><div class="bfq-what">Water-only scalp rinse (no shampoo)</div></div>
+    </div>
+  </div>
+
+  <!-- PRE-BATH -->
+  <div class="section" id="sec-pre-bath">
+    <div class="section-header" onclick="toggleSection('sec-pre-bath')">
+      <div class="section-title"><span class="section-icon">☀️</span> Before You Step In</div>
+      <div class="section-progress">
+        <div class="progress-bar"><div class="progress-fill" id="prog-pre" style="width:0%"></div></div>
+        <div class="progress-text" id="txt-pre">0/0</div>
+        <span class="chevron">▼</span>
+      </div>
+    </div>
+    <div class="section-body">
+      <div id="list-pre-bath">
+        <div class="bathe-check-item" onclick="bToggle(this)" data-bid="b-pre1">
+          <div class="b-box"></div>
+          <div class="bathe-step-num sn-pre">1</div>
+          <div class="bathe-step-content">
+            <div class="bathe-step-title">Brush / detangle hair before entering</div>
+            <div class="bathe-step-note">Wet hair is 3× more fragile. Knots before = breakage during wash. Use wide-tooth comb.</div>
+          </div>
+        </div>
+        <div class="bathe-check-item" onclick="bToggle(this)" data-bid="b-pre2">
+          <div class="b-box"></div>
+          <div class="bathe-step-num sn-pre">2</div>
+          <div class="bathe-step-content">
+            <div class="bathe-step-title">Fill a mug with RO / filtered water for final hair rinse</div>
+            <div class="bathe-step-note">The single most effective hard water fix. Keeps a bottle near your bucket/shower.</div>
+          </div>
+        </div>
+        <div class="bathe-check-item" onclick="bToggle(this)" data-bid="b-pre3">
+          <div class="b-box"></div>
+          <div class="bathe-step-num sn-pre">3</div>
+          <div class="bathe-step-content">
+            <div class="bathe-step-title">If oil massage day → apply oil 30 min before bath</div>
+            <div class="bathe-step-note">Coconut or castor oil on scalp. Massage 15 min. Let sit 30 min then wash out. Do this Friday before Saturday wash.</div>
+          </div>
+        </div>
+        <div class="bathe-check-item" onclick="bToggle(this)" data-bid="b-pre4">
+          <div class="b-box"></div>
+          <div class="bathe-step-num sn-pre">4</div>
+          <div class="bathe-step-content">
+            <div class="bathe-step-title">If lemon / ACV rinse day → prep the mix now</div>
+            <div class="bathe-step-note">2 tbsp lemon juice (or ACV) + 1 cup water in a mug. Set aside for step 9.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DURING BATH -->
+  <div class="section" id="sec-dur-bath">
+    <div class="section-header" onclick="toggleSection('sec-dur-bath')">
+      <div class="section-title"><span class="section-icon">🚿</span> During Bath — Step by Step</div>
+      <div class="section-progress">
+        <div class="progress-bar"><div class="progress-fill" id="prog-dur" style="width:0%"></div></div>
+        <div class="progress-text" id="txt-dur">0/0</div>
+        <span class="chevron">▼</span>
+      </div>
+    </div>
+    <div class="section-body">
+      <div id="list-dur-bath">
+        <div class="bathe-check-item" onclick="bToggle(this)" data-bid="b-d1">
+          <div class="b-box"></div>
+          <div class="bathe-step-num sn-dur">1</div>
+          <div class="bathe-step-content">
+            <div class="bathe-step-title">Wet entire body with lukewarm water <span class="temp-chip tc-lk">LUKEWARM</span></div>
+            <div class="bathe-step-note">Start here. Lukewarm opens pores for cleaning. Never start with hot.</div>
+          </div>
+        </div>
+        <div class="bathe-check-item" onclick="bToggle(this)" data-bid="b-d2">
+          <div class="b-box"></div>
+          <div class="bathe-step-num sn-dur">2</div>
+          <div class="bathe-step-content">
+            <div class="bathe-step-title">Shampoo — scalp only, massage with fingertips <span class="temp-chip tc-lk">HAIR WASH DAYS</span></div>
+            <div class="bathe-step-note">Apply shampoo only to scalp. Massage gently with fingertips (not nails). Let sit 60 sec. The suds running down the lengths are enough for them.</div>
+          </div>
+        </div>
+        <div class="bathe-check-item" onclick="bToggle(this)" data-bid="b-d3">
+          <div class="b-box"></div>
+          <div class="bathe-step-num sn-dur">3</div>
+          <div class="bathe-step-content">
+            <div class="bathe-step-title">Rinse shampoo fully — lukewarm <span class="temp-chip tc-lk">LUKEWARM</span></div>
+            <div class="bathe-step-note">Make sure zero shampoo residue remains. Residue = dandruff and itchy scalp.</div>
+          </div>
+        </div>
+        <div class="bathe-check-item" onclick="bToggle(this)" data-bid="b-d4">
+          <div class="b-box"></div>
+          <div class="bathe-step-num sn-dur">4</div>
+          <div class="bathe-step-content">
+            <div class="bathe-step-title">Apply conditioner — mid-lengths to ends ONLY</div>
+            <div class="bathe-step-note">Never apply conditioner to scalp — causes oiliness and clogged follicles. Just the lengths and ends. Leave in for 2–3 min.</div>
+          </div>
+        </div>
+        <div class="bathe-check-item" onclick="bToggle(this)" data-bid="b-d5">
+          <div class="b-box"></div>
+          <div class="bathe-step-num sn-dur">5</div>
+          <div class="bathe-step-content">
+            <div class="bathe-step-title">Soap up body while conditioner sits</div>
+            <div class="bathe-step-note">Use this 2–3 min productively. Lather soap on body, underarms, back. Let conditioner do its job simultaneously.</div>
+          </div>
+        </div>
+        <div class="bathe-check-item" onclick="bToggle(this)" data-bid="b-d6">
+          <div class="b-box"></div>
+          <div class="bathe-step-num sn-dur">6</div>
+          <div class="bathe-step-content">
+            <div class="bathe-step-title">Rinse body soap thoroughly <span class="temp-chip tc-lk">LUKEWARM</span></div>
+            <div class="bathe-step-note">Soap residue on skin = pore clogging. Rinse underarms and back especially well.</div>
+          </div>
+        </div>
+        <div class="bathe-check-item" onclick="bToggle(this)" data-bid="b-d7">
+          <div class="b-box"></div>
+          <div class="bathe-step-num sn-dur">7</div>
+          <div class="bathe-step-content">
+            <div class="bathe-step-title">Wash face with foam cleanser — cool water <span class="temp-chip tc-cold">COOL</span></div>
+            <div class="bathe-step-note">Use Cetaphil or Minimalist cleanser. Gentle circular motion 30 sec. Cool water — never hot on face. Rinse fully.</div>
+          </div>
+        </div>
+        <div class="bathe-check-item" onclick="bToggle(this)" data-bid="b-d8">
+          <div class="b-box"></div>
+          <div class="bathe-step-num sn-dur">8</div>
+          <div class="bathe-step-content">
+            <div class="bathe-step-title">Rinse conditioner out — lukewarm <span class="temp-chip tc-lk">LUKEWARM</span></div>
+            <div class="bathe-step-note">Rinse until hair no longer feels slippery. Conditioner residue left in = greasy hair.</div>
+          </div>
+        </div>
+        <div class="bathe-check-item" onclick="bToggle(this)" data-bid="b-d9">
+          <div class="b-box"></div>
+          <div class="bathe-step-num sn-dur">9</div>
+          <div class="bathe-step-content">
+            <div class="bathe-step-title">Pour lemon / ACV rinse over hair <span class="temp-chip tc-warm">RINSE DAY ONLY</span></div>
+            <div class="bathe-step-note">Pour the pre-mixed mug (2 tbsp lemon juice + 1 cup water) over scalp and hair. Leave 2 min. Neutralises hard water minerals.</div>
+          </div>
+        </div>
+        <div class="bathe-check-item" onclick="bToggle(this)" data-bid="b-d10">
+          <div class="b-box"></div>
+          <div class="bathe-step-num sn-dur">10</div>
+          <div class="bathe-step-content">
+            <div class="bathe-step-title">Final cold blast on hair — 10 seconds <span class="temp-chip tc-cold">COLD</span></div>
+            <div class="bathe-step-note">Closes the hair cuticle. Locks in moisture. Seals shine. Makes hard water minerals less likely to deposit. Do this EVERY wash.</div>
+          </div>
+        </div>
+        <div class="bathe-check-item" onclick="bToggle(this)" data-bid="b-d11">
+          <div class="b-box"></div>
+          <div class="bathe-step-num sn-dur">11</div>
+          <div class="bathe-step-content">
+            <div class="bathe-step-title">Pour filtered / RO water mug over hair as final rinse</div>
+            <div class="bathe-step-note">The last thing to touch your hair should be clean water, not hard tap water. This one step dramatically reduces mineral buildup.</div>
+          </div>
+        </div>
+        <div class="bathe-check-item" onclick="bToggle(this)" data-bid="b-d12">
+          <div class="b-box"></div>
+          <div class="bathe-step-num sn-dur">12</div>
+          <div class="bathe-step-content">
+            <div class="bathe-step-title">Cold splash on face — 30 seconds <span class="temp-chip tc-cold">COLD</span></div>
+            <div class="bathe-step-note">Right before stepping out. Reduces puffiness, tightens pores. Works synergistically with your skincare routine.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- POST BATH -->
+  <div class="section" id="sec-post-bath">
+    <div class="section-header" onclick="toggleSection('sec-post-bath')">
+      <div class="section-title"><span class="section-icon">✨</span> After Bath — Don't Skip These</div>
+      <div class="section-progress">
+        <div class="progress-bar"><div class="progress-fill" id="prog-post" style="width:0%"></div></div>
+        <div class="progress-text" id="txt-post">0/0</div>
+        <span class="chevron">▼</span>
+      </div>
+    </div>
+    <div class="section-body">
+      <div id="list-post-bath">
+        <div class="bathe-check-item" onclick="bToggle(this)" data-bid="b-p1">
+          <div class="b-box"></div>
+          <div class="bathe-step-num sn-post">1</div>
+          <div class="bathe-step-content">
+            <div class="bathe-step-title">Gently squeeze water out of hair — don't wring</div>
+            <div class="bathe-step-note">Wringing twists and snaps wet hair. Squeeze downward with palms gently.</div>
+          </div>
+        </div>
+        <div class="bathe-check-item" onclick="bToggle(this)" data-bid="b-p2">
+          <div class="b-box"></div>
+          <div class="bathe-step-num sn-post">2</div>
+          <div class="bathe-step-content">
+            <div class="bathe-step-title">Pat hair dry with towel — never rub</div>
+            <div class="bathe-step-note">Rubbing creates friction → frizz + breakage. Pat in sections. Hard water makes hair especially fragile when wet.</div>
+          </div>
+        </div>
+        <div class="bathe-check-item" onclick="bToggle(this)" data-bid="b-p3">
+          <div class="b-box"></div>
+          <div class="bathe-step-num sn-post">3</div>
+          <div class="bathe-step-content">
+            <div class="bathe-step-title">Pat face dry — immediately apply niacinamide serum</div>
+            <div class="bathe-step-note">Apply while face is slightly damp — better absorption. Then moisturizer, then SPF (if morning).</div>
+          </div>
+        </div>
+        <div class="bathe-check-item" onclick="bToggle(this)" data-bid="b-p4">
+          <div class="b-box"></div>
+          <div class="bathe-step-num sn-post">4</div>
+          <div class="bathe-step-content">
+            <div class="bathe-step-title">Detangle hair with wide-tooth comb only</div>
+            <div class="bathe-step-note">Start from ends, work upward to roots. Never drag from root down. If you have leave-in serum — apply now before combing.</div>
+          </div>
+        </div>
+        <div class="bathe-check-item" onclick="bToggle(this)" data-bid="b-p5">
+          <div class="b-box"></div>
+          <div class="bathe-step-num sn-post">5</div>
+          <div class="bathe-step-content">
+            <div class="bathe-step-title">Apply body moisturizer within 3 min of towel dry</div>
+            <div class="bathe-step-note">The "3 minute rule" — skin retains moisture from the shower for about 3 min. Moisturizer applied in this window locks it in. Hard water especially dries skin out.</div>
+          </div>
+        </div>
+        <div class="bathe-check-item" onclick="bToggle(this)" data-bid="b-p6">
+          <div class="b-box"></div>
+          <div class="bathe-step-num sn-post">6</div>
+          <div class="bathe-step-content">
+            <div class="bathe-step-title">Let hair air dry — no heat</div>
+            <div class="bathe-step-note">No hair dryer unless urgent. Hard water + heat = brittle, mineral-baked hair. Air dry naturally.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOAP GUIDE -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title"><span class="section-icon">🧼</span> Soap & Body Wash Guide</div>
+    </div>
+    <div class="soap-grid">
+      <div class="soap-card">
+        <h5 style="color:var(--accent3)">✅ Use These</h5>
+        <ul>
+          <li class="soap-good"><div><strong>Dove</strong> — moisturising, mild, best daily bar for hard water. pH balanced.</div></li>
+          <li class="soap-good"><div><strong>Pears (transparent)</strong> — glycerin-rich, doesn't dry skin, gentle.</div></li>
+          <li class="soap-good"><div><strong>Cetaphil bar / wash</strong> — best option for sensitive/acne-prone skin.</div></li>
+          <li class="soap-good"><div><strong>Nivea Creme / body lotion bar</strong> — leaves skin less dry in hard water.</div></li>
+        </ul>
+      </div>
+      <div class="soap-card">
+        <h5 style="color:var(--red)">❌ Avoid These</h5>
+        <ul>
+          <li class="soap-bad"><div><strong>Dettol daily</strong> — antibacterial but very drying. Use only when needed, not every day.</div></li>
+          <li class="soap-bad"><div><strong>Lifebuoy</strong> — harsh surfactants, strips natural oils aggressively.</div></li>
+          <li class="soap-bad"><div><strong>Highly fragranced soaps</strong> — irritate skin, especially in hard water areas.</div></li>
+          <li class="soap-bad"><div><strong>Any soap with SLS as first ingredient</strong> — too stripping for daily use.</div></li>
+        </ul>
+      </div>
+    </div>
+    <div style="padding:0 20px 16px;">
+      <div class="interval-explain">For body: soap the armpits, groin, feet, back thoroughly. The rest of the body just needs a water rinse — over-soaping everywhere dries skin unnecessarily.</div>
+    </div>
+  </div>
+
+  <!-- ACV ALTERNATIVES -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title"><span class="section-icon">🍋</span> ACV Alternatives — Hard Water Mineral Rinse</div>
+    </div>
+    <div class="acv-alt-grid">
+      <div class="acv-card">
+        <div class="acv-icon">🍋</div>
+        <div class="acv-info">
+          <h5>Fresh Lemon Juice Rinse <span class="acv-tag acv-free">FREE / ₹10</span></h5>
+          <p><strong>Best immediate alternative to ACV.</strong> Citric acid works the same way — neutralises alkaline mineral deposits, lowers hair pH, adds shine.</p>
+          <p><strong>How:</strong> 2 tbsp fresh lemon juice + 1 cup water. Pour after conditioning, leave 2 min, rinse. 1× per week.</p>
+          <p><strong>⚠️ Note:</strong> Don't use undiluted — too acidic. Always dilute. Avoid if you have scalp cuts/wounds.</p>
+        </div>
+      </div>
+      <div class="acv-card">
+        <div class="acv-icon">🍚</div>
+        <div class="acv-info">
+          <h5>Rice Water Rinse <span class="acv-tag acv-free">FREE</span></h5>
+          <p>Ancient Indian remedy. Soak ½ cup raw rice in 2 cups water for 30 min. Strain. Use that water as a post-shampoo rinse.</p>
+          <p>Contains inositol — repairs hair damage, adds volume and shine. Also helps remove some mineral buildup.</p>
+          <p><strong>How:</strong> Pour over hair after conditioner, leave 5 min, rinse. Use fermented version (soak 24 hrs, refrigerate) for stronger effect.</p>
+        </div>
+      </div>
+      <div class="acv-card">
+        <div class="acv-icon">🍵</div>
+        <div class="acv-info">
+          <h5>Green Tea Rinse <span class="acv-tag acv-cheap">₹5 per use</span></h5>
+          <p>Brew 2 green tea bags in 2 cups water, let cool fully. Use as final hair rinse after conditioner.</p>
+          <p>Mild acidity helps slightly with minerals. Main benefit: antioxidants for scalp health, reduces dandruff, adds mild shine.</p>
+          <p><strong>How:</strong> Pour cooled tea over scalp and hair, leave 3 min, rinse with filtered water.</p>
+        </div>
+      </div>
+      <div class="acv-card" style="border-color:rgba(124,106,255,0.3);">
+        <div class="acv-icon">🛒</div>
+        <div class="acv-info">
+          <h5>Should You Order ACV? <span class="acv-tag acv-order">₹150–200 · Highly Recommended</span></h5>
+          <p><strong>Yes — order it.</strong> ACV is the most effective of all options and lasts 3–4 months (you use very little per rinse). One bottle = ~50 rinses.</p>
+          <p>Order <strong>Bragg Organic ACV</strong> (₹450 for 473ml — lasts 6 months) or any raw unfiltered ACV from Blinkit/Swiggy Instamart/Amazon.</p>
+          <p><strong>Until it arrives:</strong> Use lemon juice rinse weekly — it's 85% as effective and free.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HARD WATER TIPS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title"><span class="section-icon">💧</span> Hard Water — Campus Survival Tips</div>
+    </div>
+    <div class="hw-tips">
+      <div class="hw-tip"><div class="hw-tip-icon">🪣</div><span>Keep a <strong>1-litre filtered / RO water bottle</strong> in your bathroom. Use it as the final pour over hair after every wash. Single biggest hair improvement for zero cost.</span></div>
+      <div class="hw-tip"><div class="hw-tip-icon">🧴</div><span>Use a <strong>chelating / clarifying shampoo once a week</strong> (Neutrogena Anti-Residue, Mamaearth Onion Shampoo). Removes mineral crust regular shampoo can't touch.</span></div>
+      <div class="hw-tip"><div class="hw-tip-icon">❄️</div><span>Always end hair wash with a <strong>cold rinse</strong>. Minerals deposit more on warm/open cuticles. Cold closes the cuticle and locks moisture in.</span></div>
+      <div class="hw-tip"><div class="hw-tip-icon">🪮</div><span>Hard water makes hair <strong>tangle more</strong>. Always brush before shower and use a wide-tooth comb only when wet. Never a fine-tooth comb on wet hair.</span></div>
+      <div class="hw-tip"><div class="hw-tip-icon">🧼</div><span>Hard water reduces soap lather. You'll use <strong>more soap than needed</strong> trying to lather. Use <strong>less soap, more water</strong>. Dove and glycerin bars lather better in hard water than cheap soaps.</span></div>
+      <div class="hw-tip"><div class="hw-tip-icon">💊</div><span>Hard water = dry skin always. Apply body moisturizer <strong>within 3 minutes</strong> of stepping out. Hard water strips the skin barrier more than soft water.</span></div>
+    </div>
+  </div>
+
+</div>
+<!-- END BATHE TAB -->
+
 <script>
   // ---- State ----
   const TODAY_KEY = () => new Date().toISOString().slice(0,10);
@@ -1844,6 +2252,47 @@
   restoreSpeedChecks();
   restoreTestLog();
   renderWeekState();
+
+  // ---- Bathe Tab: Checklist ----
+  const batheDailyKey = 'bathe_' + TODAY_KEY();
+  let batheState = loadState(batheDailyKey);
+
+  function bToggle(el) {
+    const id = el.dataset.bid;
+    const checked = !batheState[id];
+    batheState[id] = checked;
+    saveState(batheDailyKey, batheState);
+    el.classList.toggle('bchecked', checked);
+    updateBatheProgress();
+    if (checked) celebrate();
+  }
+
+  function bSectionProgress(listId, progId, txtId) {
+    const items = document.querySelectorAll('#' + listId + ' .bathe-check-item');
+    if (!items.length) return;
+    const total = items.length;
+    const done = [...items].filter(i => i.classList.contains('bchecked')).length;
+    const pct = total ? (done / total * 100) : 0;
+    const prog = document.getElementById(progId);
+    const txt = document.getElementById(txtId);
+    if (prog) prog.style.width = pct + '%';
+    if (txt) txt.textContent = done + '/' + total;
+  }
+
+  function updateBatheProgress() {
+    bSectionProgress('list-pre-bath', 'prog-pre', 'txt-pre');
+    bSectionProgress('list-dur-bath', 'prog-dur', 'txt-dur');
+    bSectionProgress('list-post-bath', 'prog-post', 'txt-post');
+  }
+
+  function restoreBatheState() {
+    document.querySelectorAll('.bathe-check-item[data-bid]').forEach(el => {
+      if (batheState[el.dataset.bid]) el.classList.add('bchecked');
+    });
+    updateBatheProgress();
+  }
+
+  restoreBatheState();
 
 
   // ---- PWA Service Worker ----
