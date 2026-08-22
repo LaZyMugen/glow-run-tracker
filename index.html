@@ -566,12 +566,13 @@
 </div>
 
 <div class="tabs">
-  <button class="tab active" onclick="switchTab('daily')">📋 Daily Routine</button>
-  <button class="tab" onclick="switchTab('weekly')">📅 Weekly Plan</button>
-  <button class="tab" onclick="switchTab('speed')">⚡ Speed Plan</button>
+  <button class="tab active" onclick="switchTab('daily')">☀️ Daily</button>
+  <button class="tab" onclick="switchTab('weekly')">📅 Weekly</button>
+  <button class="tab" onclick="switchTab('speed')">⚡ Speed</button>
+  <button class="tab" onclick="switchTab('gym')">🏋️ Gym</button>
   <button class="tab" onclick="switchTab('bathe')">🚿 Bathe</button>
   <button class="tab" onclick="switchTab('donts')">🚫 Don'ts</button>
-  <button class="tab" onclick="switchTab('reference')">📖 Reference</button>
+  <button class="tab" onclick="switchTab('reference')">📚 Ref</button>
 </div>
 
 <!-- DAILY TAB -->
@@ -635,7 +636,7 @@
         <div class="check-box"></div>
         <div class="item-content">
           <div class="item-text">🔴 Salicylic Acid 2% — on nose/blackheads <span class="item-tag tag-skin">SKIN</span></div>
-          <div class="item-note">Use 2-3x a week in the morning after washing. Let it dry for 1 min.</div>
+          <div class="item-note">TUESDAY & FRIDAY ONLY. After washing, let dry for 1 min. Never daily.</div>
         </div>
       </div>
       <div class="check-item" onclick="toggle(this)" data-id="am4">
@@ -1680,6 +1681,106 @@
 <!-- END SPEED PLAN TAB -->
 
 <!-- BATHE TAB -->
+<!-- GYM TAB -->
+<div class="tab-panel content" id="tab-gym">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title"><span class="section-icon">🏋️</span> Upper Body Gym (2 Days/Week)</div>
+    </div>
+    <div style="padding:16px 20px; font-size:0.85rem; color:var(--text2); line-height:1.5;">
+      Protect your muscle mass while leaning out. Keep these sessions separate from your hard running days. In and out in 45 minutes.
+    </div>
+
+    <!-- Workout A -->
+    <div style="margin: 0 20px 20px 20px; background:var(--surface2); border:1px solid var(--border); border-radius:12px; overflow:hidden;">
+      <div style="background:rgba(124,106,255,0.1); padding:12px 16px; border-bottom:1px solid var(--border); font-weight:700; font-size:0.95rem;">
+        Day 1: Monday (Push Focus + Pull)
+      </div>
+      <div class="checklist">
+        <div class="check-item" onclick="toggle(this)" data-id="g1a">
+          <div class="check-box"></div>
+          <div class="item-content">
+            <div class="item-text">1️⃣ Flat Dumbbell Press (Chest)</div>
+            <div class="item-note">3 Sets × 8 to 10 reps (Leave 2 reps in the tank)</div>
+          </div>
+        </div>
+        <div class="check-item" onclick="toggle(this)" data-id="g1b">
+          <div class="check-box"></div>
+          <div class="item-content">
+            <div class="item-text">2️⃣ Lat Pulldown Machine (Back)</div>
+            <div class="item-note">3 Sets × 10 to 12 reps (Pull to chest, squeeze lats)</div>
+          </div>
+        </div>
+        <div class="check-item" onclick="toggle(this)" data-id="g1c">
+          <div class="check-box"></div>
+          <div class="item-content">
+            <div class="item-text">3️⃣ Seated Dumbbell Shoulder Press (Shoulders)</div>
+            <div class="item-note">3 Sets × 10 reps (Core tight, back straight)</div>
+          </div>
+        </div>
+        <div class="check-item" onclick="toggle(this)" data-id="g1d">
+          <div class="check-box"></div>
+          <div class="item-content">
+            <div class="item-text">4️⃣ Seated Cable Row (Mid-Back)</div>
+            <div class="item-note">3 Sets × 10 reps (Fixes runner's posture)</div>
+          </div>
+        </div>
+        <div class="check-item" onclick="toggle(this)" data-id="g1e" style="border-bottom:none;">
+          <div class="check-box"></div>
+          <div class="item-content">
+            <div class="item-text">5️⃣ The Arm Pump (Biceps & Triceps)</div>
+            <div class="item-note">3 Sets Bicep Curls + 3 Sets Tricep Pushdowns</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Workout B -->
+    <div style="margin: 0 20px 20px 20px; background:var(--surface2); border:1px solid var(--border); border-radius:12px; overflow:hidden;">
+      <div style="background:rgba(106,255,180,0.1); padding:12px 16px; border-bottom:1px solid var(--border); font-weight:700; font-size:0.95rem;">
+        Day 2: Friday (Pull Focus + Push)
+      </div>
+      <div class="checklist">
+        <div class="check-item" onclick="toggle(this)" data-id="g2a">
+          <div class="check-box"></div>
+          <div class="item-content">
+            <div class="item-text">1️⃣ Assisted Pull-ups or Lat Pulldown (Back)</div>
+            <div class="item-note">3 Sets × 8 to 10 reps</div>
+          </div>
+        </div>
+        <div class="check-item" onclick="toggle(this)" data-id="g2b">
+          <div class="check-box"></div>
+          <div class="item-content">
+            <div class="item-text">2️⃣ Incline Dumbbell Press (Upper Chest)</div>
+            <div class="item-note">3 Sets × 10 reps (Sets the chest shape)</div>
+          </div>
+        </div>
+        <div class="check-item" onclick="toggle(this)" data-id="g2c">
+          <div class="check-box"></div>
+          <div class="item-content">
+            <div class="item-text">3️⃣ Dumbbell Lateral Raises (Side Delts)</div>
+            <div class="item-note">3 Sets × 12 to 15 reps (Makes shoulders wider)</div>
+          </div>
+        </div>
+        <div class="check-item" onclick="toggle(this)" data-id="g2d">
+          <div class="check-box"></div>
+          <div class="item-content">
+            <div class="item-text">4️⃣ One-Arm Dumbbell Row (Lats)</div>
+            <div class="item-note">3 Sets × 10 reps each arm</div>
+          </div>
+        </div>
+        <div class="check-item" onclick="toggle(this)" data-id="g2e" style="border-bottom:none;">
+          <div class="check-box"></div>
+          <div class="item-content">
+            <div class="item-text">5️⃣ Hammer Curls & Overhead Tricep Ext.</div>
+            <div class="item-note">3 Sets each (Superset for the final arm pump)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="tab-panel content" id="tab-bathe">
 
   <div class="bathe-hero">
